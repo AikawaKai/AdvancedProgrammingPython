@@ -3,6 +3,7 @@ SUFFIXES = {1000:['KB','MB','GB','TB','PB','EB','ZB','YB'],
 
 def approximate_size(size, a_kilobyte_is_1024_bytes=True):
 	'''Convert a file Size to human-readable form.'''
+	print(__name__)
 	if size < 0:
 		raise ValueError('number must be non-negative')
 	multiple = 1024 if a_kilobyte_is_1024_bytes else 1000
