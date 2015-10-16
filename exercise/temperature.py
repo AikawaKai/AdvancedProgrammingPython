@@ -33,29 +33,29 @@ def OthersToCelsius(other, num):
     }[num]
 
 def table(num):
-    print('          {0[0]:>10}{0[1]:>10}{0[2]:>10}{0[3]:>10}{0[4]:>10}{0[5]:>10}{0[6]:>10}{0[7]:>10}\n'.format(temperature))
+    print('          {0[0]:<10}{0[1]:<10}{0[2]:<10}{0[3]:<10}{0[4]:<10}{0[5]:<10}{0[6]:<10}{0[7]:<10}\n'.format(temperature))
     for i in range (0, 8):
-        print ('{0:>10}'.format(temperature[i]), end="")
+        print ('{0:<10}'.format(temperature[i]), end="")
         for j in range(0, 8):
             if i==j:
-                print ('{0:>10.2f}'.format(num),end="")
+                print ('{0:<10.2f}'.format(num),end="")
             else:
-                print ('{0:>10.2f}'.format(CelsiusToOthers(OthersToCelsius(num,i),j)),end="")
+                print ('{0:<10.2f}'.format(CelsiusToOthers(OthersToCelsius(num,i),j)),end="")
             if j==7:
                 print()
 
 def toAll(value, num):
-    return ([CelsiusToOthers(OthersToCelsius(value,i),num) for i in range(0, 8)])
+    mylist = [CelsiusToOthers(OthersToCelsius(value,i),num) for i in range(0, 8)]
+    print ("\n\n{0[0]:<10.2f}{1[0]:<10}\n"\
+           "{0[1]:<10.2f}{1[1]:<10}\n"\
+           "{0[2]:<10.2f}{1[2]:<10}\n"\
+           "{0[3]:<10.2f}{1[3]:<10}\n"\
+           "{0[4]:<10.2f}{1[4]:<10}\n"\
+           "{0[5]:<10.2f}{1[5]:<10}\n"\
+           "{0[6]:<10.2f}{1[6]:<10}\n"\
+           "{0[7]:<10.2f}{1[7]:<10}\n".format(mylist, temperature))
 
 
 if __name__ == '__main__':
     table(-40)
-
-    print("\n\n{0[0]:>10.2f}{1[0]:>10}\n"\
-          "{0[1]:>10.2f}{1[1]:>10}\n"\
-          "{0[2]:>10.2f}{1[2]:>10}\n"\
-          "{0[3]:>10.2f}{1[3]:>10}\n"\
-          "{0[4]:>10.2f}{1[4]:>10}\n"\
-          "{0[5]:>10.2f}{1[5]:>10}\n"\
-          "{0[6]:>10.2f}{1[6]:>10}\n"\
-          "{0[7]:>10.2f}{1[7]:>10}\n".format(toAll(-40, 4), temperature))
+    toAll(-40, 4)
