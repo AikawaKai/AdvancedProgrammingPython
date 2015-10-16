@@ -1,4 +1,5 @@
 import sys
+import functools
 
 temperature = [ "Fahren.","Kelvin", \
                "Rankine", "Delisle", "Newton", \
@@ -32,30 +33,26 @@ def OthersToCelsius(other, num):
         7 : other
     }[num]
 
+
 def table(num):
     print('          {0[0]:<10}{0[1]:<10}{0[2]:<10}{0[3]:<10}{0[4]:<10}{0[5]:<10}{0[6]:<10}{0[7]:<10}\n'.format(temperature))
-    for i in range (0, 8):
-        print ('{0:<10}'.format(temperature[i]), end="")
-        for j in range(0, 8):
-            if i==j:
-                print ('{0:<10.2f}'.format(num),end="")
-            else:
-                print ('{0:<10.2f}'.format(CelsiusToOthers(OthersToCelsius(num,i),j)),end="")
-            if j==7:
-                print()
+    listtable = [[CelsiusToOthers(OthersToCelsius(num,i),j) for j in range(0,8)]  for i in range(0,8)]
+    MapFormatString = lambda x: "{0:<10.2f}".format(x)
+    newlist = [(list(map(MapFormatString, mylist))) for mylist in listtable]
+    ConcatString = lambda x,y: x + y
+    i=0
+    for mylist in newlist:
+        print("{0:<10}{1}\n".format(temperature[i],functools.reduce(ConcatString, mylist)))
+        i+=1
+
 
 def toAll(value, num):
-    mylist = [CelsiusToOthers(OthersToCelsius(value,i),num) for i in range(0, 8)]
-    print ("\n\n{0[0]:<10.2f}{1[0]:<10}\n"\
-           "{0[1]:<10.2f}{1[1]:<10}\n"\
-           "{0[2]:<10.2f}{1[2]:<10}\n"\
-           "{0[3]:<10.2f}{1[3]:<10}\n"\
-           "{0[4]:<10.2f}{1[4]:<10}\n"\
-           "{0[5]:<10.2f}{1[5]:<10}\n"\
-           "{0[6]:<10.2f}{1[6]:<10}\n"\
-           "{0[7]:<10.2f}{1[7]:<10}\n".format(mylist, temperature))
+    mylist = [(temperature[i],(CelsiusToOthers(OthersToCelsius(value,i),num))) for i in range(0, 8)]
+    mylist = sorted(mylist)
+    for i in mylist:
+        print("{0:<10}{1:.2f}".format(i[0],i[1]))
 
 
 if __name__ == '__main__':
     table(-40)
-    toAll(-40, 4)
+    toAll(-40, 0)
