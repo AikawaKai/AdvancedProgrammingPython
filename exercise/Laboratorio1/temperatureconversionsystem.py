@@ -1,5 +1,9 @@
+def celsiusToCelsius(celsius):
+    return celsius
+
+
 def celsiusToFahrenheit(celsius):
-    return celsius * ((9/2) + 32)
+    return (celsius * (9/5)) + 32
 
 
 def fahrenheitToCelsius(fahrenheit):
@@ -54,9 +58,26 @@ def romerToCelsius(romer):
     return (romer - 7.5) * (40/21)
 
 
-celsiusToOthers = [celsiusToFahrenheit, celsiusToKelvin, celsiusToRankine,
-                   celsiusToDelisle, celsiusToNewton, celsiusToReaumur,
-                   celsiusToRomer]
-othersToCelsius = [fahrenheitToCelsius, kelvinToCelsius, rankineToCelsius,
-                   delisleToCelsius, newtonToCelsius, reaumurToCelsius,
-                   romerToCelsius]
+celsiusToOthers = [celsiusToCelsius, celsiusToFahrenheit, celsiusToKelvin,
+                   celsiusToRankine, celsiusToDelisle, celsiusToNewton,
+                   celsiusToReaumur, celsiusToRomer]
+othersToCelsius = [celsiusToCelsius, fahrenheitToCelsius, kelvinToCelsius,
+                   rankineToCelsius, delisleToCelsius, newtonToCelsius,
+                   reaumurToCelsius, romerToCelsius]
+
+temp = ["Celsius", "fahrenheit", "kelvin", "Rankine", "Delisle", "Newton",
+        "Reaumer", "Romer"]
+
+
+def table(pureNumber):
+    for t in temp:
+        print("{:<13}".format(t), end="")
+    print("\n")
+    for x in othersToCelsius:
+        for y in celsiusToOthers:
+            print("{:<13.2f}".format(y(x(pureNumber))), end="")
+        print("\n")
+
+
+if __name__ == '__main__':
+    table(10)
