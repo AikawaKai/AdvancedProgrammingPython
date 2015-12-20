@@ -13,4 +13,4 @@ if __name__ == '__main__':
     merged_list = alkaline_earth_metals_dict.copy()
     merged_list.update(noble_gases)
     print(merged_list)
-    print(sorted(merged_list.items(), key=lambda x: x[1]))
+    print(sorted(merged_list.items(), key=lambda x: x[1], reverse=False))
