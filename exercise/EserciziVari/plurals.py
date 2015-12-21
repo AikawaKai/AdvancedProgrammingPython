@@ -35,9 +35,25 @@ def apply_default(noun):
 rules = [(match_sxz, apply_sxz), (match_h, apply_h), (match_y, apply_y),
          (match_default, apply_default)]
 
+patterns = [('[sxz]$', '$', 'es'), ('[^aeioudgkprt]h$', '$', 'es'),
+            ('[^aeiou]y$', 'y$', 'ies'), ('$', '$', 's')]
+
+
+def build_match_and_apply(pattern, search, replace):
+    def match(word):
+        return re.search(pattern, word)
+
+    def apply_rule(word):
+        return re.sub(search, replace, word)
+
+    return (match, apply_rule)
+
+rulez = [build_match_and_apply(pattern, search, replace)
+         for (pattern, search, replace) in patterns]
+
 
 def plural(noun):
-    for matches_rule, apply_rule in rules:
+    for matches_rule, apply_rule in rulez:
         if matches_rule(noun):
             return apply_rule(noun)
 
