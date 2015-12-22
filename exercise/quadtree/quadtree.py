@@ -42,10 +42,10 @@ class quadtree:
 
     def __str__(self):
         if self.son is not None:
-            stringToPrint = "Value: " + str(self.value) + "\n1Child: " + str(self.son[0]) + " " + "2Child: " + str(self.son[1]) + " " + "3Child: " + str(self.son[2]) + " " + "4Child: " + str(self.son[3])
-            return stringToPrint
+            root = "\nValue: " + str(self.value) + "\n" + "NODO 0: " + str(self.son[0]) + "NODO 1: " + str(self.son[1]) +  "NODO 2: " + str(self.son[2]) + "NODO 3: " + str(self.son[3])
+            return root
         else:
-            return "Value: " + str(self.value) + "\n"
+            return "\nFOGLIA: " + str(self.value) + "\n"
 
 
 def getMatrixFromVector(vector):
@@ -57,8 +57,8 @@ def getSubMatrixFromMatrix(matrix):
     n = len(matrix)
     matrix1 = [matrix[i][0:int(n/2)] for i in range(int(n/2))]
     matrix2 = [matrix[i][int(n/2):n] for i in range(int(n/2))]
-    matrix3 = [matrix[i][0:int(n/2)] for i in range(int(n/2), n)]
-    matrix4 = [matrix[i][int(n/2):n] for i in range(int(n/2), n)]
+    matrix4 = [matrix[i][0:int(n/2)] for i in range(int(n/2), n)]
+    matrix3 = [matrix[i][int(n/2):n] for i in range(int(n/2), n)]
     return (matrix1, matrix2, matrix3, matrix4)
 
 
