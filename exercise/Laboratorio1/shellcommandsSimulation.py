@@ -37,7 +37,7 @@ def more(File):
         start = 0
         threshold = 30
         listOfLine = list(f)
-        while threshold < len(listOfLine):
+        while start < len(listOfLine):
             currentList = listOfLine[start:threshold]
             do_print(currentList)
             input("PRESS ANY KEY")
