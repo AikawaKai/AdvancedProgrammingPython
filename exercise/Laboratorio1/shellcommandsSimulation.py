@@ -27,18 +27,23 @@ def chmod(listOfFile, mode):
     return mode
 
 
+def do_print(listOfLine):
+    for line in listOfLine:
+        print(line, end="")
+
+
 def more(File):
     with open(File) as f:
-        count = 0
+        start = 0
         threshold = 30
-        for line in f:
-            count += 1
-            if count <= threshold:
-                print(line, end="")
-            else:
-                print("Threshold: {0}".format(threshold))
-                threshold += 30
-                sys.stdin.read(1)
+        listOfLine = list(f)
+        while threshold < len(listOfLine):
+            currentList = listOfLine[start:threshold]
+            do_print(currentList)
+            input("PRESS ANY KEY")
+            start = threshold
+            threshold += 30
+        #input("PRESS ANY KEY")
 
 
 if __name__ == '__main__':
