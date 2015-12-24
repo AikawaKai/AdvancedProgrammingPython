@@ -76,7 +76,7 @@ def recursionQuadTree(matrix):
     if len(matrix) > 1:
         submatrix = getSubMatrixFromMatrix(matrix)
         (q1, q2, q3, q4) = map(recursionQuadTree, submatrix)
-        if q1.value == q2.value == q3. value == q4.value:
+        if q1.value == q2.value == q3. value == q4.value != 2:
             return quadtree(q1.value, None)
         else:
             return quadtree(2, [q1, q2, q3, q4])
