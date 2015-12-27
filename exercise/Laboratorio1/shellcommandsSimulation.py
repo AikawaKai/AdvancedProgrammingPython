@@ -1,5 +1,4 @@
 import os
-import sys
 from stat import *
 # print(os.listdir("./"))
 
@@ -43,7 +42,7 @@ def more(File):
             input("PRESS ANY KEY")
             start = threshold
             threshold += 30
-        #input("PRESS ANY KEY")
+        # input("PRESS ANY KEY")
 
 
 if __name__ == '__main__':
