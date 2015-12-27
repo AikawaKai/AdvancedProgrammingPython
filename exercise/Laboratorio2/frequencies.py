@@ -14,7 +14,8 @@ def freqs(filetext, number):
     for word in dictword:
         word_n = list(filter(lambda x: x == word, words))
         dictword[word] = len(word_n)
-    filteredlist = sorted([w for w in dictword.items() if w[1] >= number], key=lambda x: x[1], reverse = True)
+    filteredlist = sorted([w for w in dictword.items() if w[1] >= number],
+                          key=lambda x: x[1], reverse=True)
     print(filteredlist)
 
 
