@@ -1,5 +1,6 @@
 from math import pi
 from math import sqrt
+from time import sleep
 
 
 class shape():
@@ -16,9 +17,11 @@ class shape():
     def ltperim(self, other):
         return self.calculate_perimeter() < other.calculate_perimeter()
 
+    @staticmethod
     def sortedByArea(shapes):
         return sorted(shapes, key=lambda x: x.calculate_area())
 
+    @staticmethod
     def sortedByPerim(shapes):
         return sorted(shapes, key=lambda x: x.calculate_perimeter())
 
@@ -114,8 +117,16 @@ class hexagon(shape):
         return "hexagon"
 
 
+def shapeIterator(listOfShapes):
+    print("Generator...")
+    print(listOfShapes)
+    listOfShapessoretedbyArea = shape.sortedByArea(listOfShapes)
+    for shapes in listOfShapessoretedbyArea:
+        yield str(shapes)
+
+
 if __name__ == '__main__':
-    rect = rectangle(2, 5)
+    rect = rectangle(20, 5)
     squa = square(2)
     tri = equiTria(2, 5)
     circ = circle(2)
@@ -128,18 +139,24 @@ if __name__ == '__main__':
                                        key=lambda x: x.calculate_perimeter())
     listOfShapessoretedbyArea2 = shape.sortedByArea(listOfShapes)
     listOfShapessoretedbyPeri2 = shape.sortedByPerim(listOfShapes)
+
     print("NOT SORTED")
-    for shape in listOfShapes:
-        print(str(shape))
+    for shape1 in listOfShapes:
+        print(str(shape1))
     print("\nSORTED BY AREA")
-    for shape in listOfShapessoretedbyArea:
-        print(str(shape))
+    for shape2 in listOfShapessoretedbyArea:
+        print(str(shape2))
     print("\nSORTED BY PERIMETER")
-    for shape in listOfShapessoretedbyPeri:
-        print(str(shape))
+    for shape3 in listOfShapessoretedbyPeri:
+        print(str(shape3))
     print("\nSORTED BY AREA v2")
-    for shape in listOfShapessoretedbyArea2:
-        print(str(shape))
+    for shape4 in listOfShapessoretedbyArea2:
+        print(str(shape4))
     print("\nSORTED BY PERIMETER v2")
-    for shape in listOfShapessoretedbyPeri2:
-        print(str(shape))
+    for shape5 in listOfShapessoretedbyPeri2:
+        print(str(shape5))
+    iterator = shapeIterator(listOfShapes)
+    for i in range(6):
+        sleep(1)
+        value = next(iterator)
+        print(value)
