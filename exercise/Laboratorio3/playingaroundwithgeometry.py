@@ -26,7 +26,9 @@ class shape():
         return "shape"
 
     def __str__(self):
-        return "{0}, area: {1}, perim: {2}".format(self.nametype(), self.calculate_area(), self.calculate_perimeter())
+        return "{0}, area: {1}, perim: {2}".format(self.nametype(),
+                                                   self.calculate_area(),
+                                                   self.calculate_perimeter())
 
 
 class rectangle(shape):
