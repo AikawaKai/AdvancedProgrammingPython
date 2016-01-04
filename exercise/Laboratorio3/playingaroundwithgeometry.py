@@ -99,13 +99,29 @@ class pentagon(shape):
         return "pentagon"
 
 
+class hexagon(shape):
+    def __init__(self, side):
+        self.__side = side
+
+    def calculate_area(self):
+        self.__apothem = self.__side * 0.866
+        return (self.calculate_perimeter() * self.__apothem) / 2
+
+    def calculate_perimeter(self):
+        return self.__side * 6
+
+    def nametype(self):
+        return "hexagon"
+
+
 if __name__ == '__main__':
     rect = rectangle(2, 5)
     squa = square(2)
     tri = equiTria(2, 5)
     circ = circle(2)
     pent = pentagon(5)
-    listOfShapes = [rect, squa, tri, circ, pent]
+    hexa = hexagon(3)
+    listOfShapes = [rect, squa, hexa, tri, circ, pent]
     listOfShapessoretedbyArea = sorted(listOfShapes,
                                        key=lambda x: x.calculate_area())
     listOfShapessoretedbyPeri = sorted(listOfShapes,
