@@ -2,15 +2,15 @@ from itertools import permutations
 
 
 class monoid():
-    def __init__(self, S, add, i):
+    def __init__(self, S, add, i, *args):
         self._S = S
         self._add = add
         self._i = i
 
     def checkIdentity(self, *args):
-        add = self._add
         for elem in self._S:
-            if elem != add(elem, self._i, *args):
+            if self._add(self._i, elem, *args) != elem:
+                print(self._add(self._i, elem, *args), self._i)
                 return False
         return True
 
