@@ -2,7 +2,7 @@ from itertools import permutations
 
 
 class monoid():
-    def __init__(self, S, add, i, *args):
+    def __init__(self, S, add, i):
         self._S = S
         self._add = add
         self._i = i
