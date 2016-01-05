@@ -10,7 +10,7 @@ class monoid():
     def checkIdentity(self):
         add = self._add
         for elem in self._S:
-            if elem != add(elem, self._i):
+            if elem != add(elem, self._i, len(list(self._S))):
                 return False
         return True
 
@@ -46,12 +46,16 @@ class Zn():
         return zn
 
 
-def orAdd(elem1, elem2):
+def orAdd(elem1, elem2, lenght):
     return elem1 or elem2
 
 
-def baseAdd(elem1, elem2):
+def baseAdd(elem1, elem2, lenght):
     return elem1 + elem2
+
+
+def moduloNAdd(elem1, elem2, lenght):
+    return (elem1 + elem2) % lenght
 
 
 if __name__ == '__main__':
@@ -61,6 +65,6 @@ if __name__ == '__main__':
     print("L'identità è stata verificata come {0}"
           .format(monoid1.checkIdentity()))
     zn = Zn(1000)
-    monoid2 = monoid(zn, baseAdd, 0)
+    monoid2 = monoid(zn, moduloNAdd, 0)
     print("L'identità è stata verificata come {0}"
           .format(monoid2.checkIdentity()))
