@@ -7,7 +7,7 @@ class String(str):
     def palindrom(self):
         lowerself = re.sub("[ ,.;:?!]", "", self.lower())
         n = len(lowerself)
-        for i in range(n):
+        for i in range(n//2):
             if lowerself[i] != lowerself[n-(i+1)]:
                 return False
         return True
@@ -25,7 +25,7 @@ class String(str):
     def iteratorPalindrom(self):
         lowerself = re.sub("[ ,.;:?!]", "", self.lower())
         iteratorReverse = reversed(lowerself)
-        for char in lowerself:
+        for char in lowerself[0:len(lowerself)//2]:
             if next(iteratorReverse) != char:
                 return False
         return True
@@ -36,7 +36,17 @@ if __name__ == '__main__':
     print(mystring.pythonicPalindrom())  # True
     print(mystring.iteratorPalindrom())  # True
 
+    mystring = String("Do gees see God?")
+    print(mystring.palindrom())  # True
+    print(mystring.pythonicPalindrom())  # True
+    print(mystring.iteratorPalindrom())  # True
+
     mystring = String("Do geese see Godd?")
+    print(mystring.palindrom())  # False
+    print(mystring.pythonicPalindrom())  # False
+    print(mystring.iteratorPalindrom())  # False
+
+    mystring = String("Do gees see Godd?")
     print(mystring.palindrom())  # False
     print(mystring.pythonicPalindrom())  # False
     print(mystring.iteratorPalindrom())  # False
