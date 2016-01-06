@@ -34,10 +34,10 @@ class SocialNetwork():
         self._setOfNodes.add(node)
 
     def addAdiacenteToNode(self, node, adiacente):
-        if adiacente not in self._setOfNodes:
-            self._setOfNodes.add(adiacente)
         if node in self._setOfNodes:
             node.addAdiacente(adiacente)
+            if adiacente not in self._setOfNodes:
+                self._setOfNodes.add(adiacente)
         else:
             raise ValueError("Node {0} not found".format(str(node)))
 
@@ -59,13 +59,11 @@ if __name__ == '__main__':
     nodo2 = Nodo(2)
     nodo3 = Nodo(3)
     nodo4 = Nodo(4)
-    setdiprova = {nodo4, nodo2, nodo3}
-    # print(nodo1 in setdiprova)
-    # print(str(nodo1), str(nodo2))
     social = SocialNetwork(nodo1)
     social.addAdiacenteToNode(nodo1, nodo3)
     social.addAdiacenteToNode(nodo1, nodo4)
     social.addAdiacenteToNode(nodo1, nodo2)
+    social.addAdiacenteToNode(nodo2, nodo3)
 
     #print(str(nodo1), str(nodo3), str(nodo2))
     print(str(social))
