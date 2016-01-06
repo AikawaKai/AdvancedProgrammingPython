@@ -18,7 +18,9 @@ class Nodo():
         return self.__adiacenti
 
     def __str__(self):
-        return "Nodo {0}, Adiacenti{1}".format(self.__value, [x.getValue() for x in self.__adiacenti])
+        return "Nodo {0}, Adiacenti{1}".format(self.__value,
+                                               [x.getValue()
+                                                for x in self.__adiacenti])
 
 
 class SocialNetwork():
@@ -32,8 +34,12 @@ class SocialNetwork():
         self._setOfNodes.add(node)
 
     def addAdiacenteToNode(self, node, adiacente):
+        if adiacente not in self._setOfNodes:
+            self._setOfNodes.add(adiacente)
         if node in self._setOfNodes:
             node.addAdiacente(adiacente)
+        else:
+            raise ValueError("Node {0} not found".format(str(node)))
 
     def visitAll(self):
         return [(elem.getValue(), [ad.getValue() for ad
@@ -55,13 +61,11 @@ if __name__ == '__main__':
     nodo4 = Nodo(4, set())
     setdiprova = {nodo4, nodo2, nodo3}
     # print(nodo1 in setdiprova)
-    nodo1.addAdiacente(nodo2)
     # print(str(nodo1), str(nodo2))
     social = SocialNetwork(nodo1)
     social.addAdiacenteToNode(nodo1, nodo3)
-    social.addNode(nodo4)
-    social.addNode(nodo4)
-    social.addAdiacenteToNode(nodo4, nodo1)
+    social.addAdiacenteToNode(nodo1, nodo4)
+    social.addAdiacenteToNode(nodo1, nodo2)
 
     #print(str(nodo1), str(nodo3), str(nodo2))
     print(str(social))
