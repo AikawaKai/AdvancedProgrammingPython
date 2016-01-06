@@ -1,26 +1,42 @@
 import re
 
 
-class string(str):
+class String(str):
 
-    def palindrom(self, other):
+    # classical way
+    def palindrom(self):
         lowerself = re.sub("[ ,.;:?!]", "", self.lower())
-        other = re.sub("[ ,.;:?!]", "", other.lower())
         n = len(lowerself)
-        if n != len(other):
-            return False
         for i in range(n):
-            if lowerself[i] != other[n-(i+1)]:
+            if lowerself[i] != lowerself[n-(i+1)]:
                 return False
         return True
 
+    # more compact
+    def pythonicPalindrom(self):
+        lowerself = re.sub("[ ,.;:?!]", "", self.lower())
+        lowerReversed = lowerself[::-1]
+        if lowerself == lowerReversed:
+            return True
+        else:
+            return False
+
+    # with iterator
+    def iteratorPalindrom(self):
+        lowerself = re.sub("[ ,.;:?!]", "", self.lower())
+        iteratorReverse = reversed(lowerself)
+        for char in lowerself:
+            if next(iteratorReverse) != char:
+                return False
+        return True
 
 if __name__ == '__main__':
-    mystring = string("Cia o")
-    print(mystring.palindrom("o a.i:C"))  # True
-    print(mystring.palindrom("o a.i:"))  # False
-    print(mystring.palindrom("o a.i:CC"))  # False
-    print(mystring.palindrom("o a.i:::C"))  # True
-    profstring = string("Do geese see God?")
-    print(profstring.palindrom("dog eese ,see .goD!"))  # True
-    print(profstring.palindrom("dog eese ,seeD .goD!"))  # False
+    mystring = String("Do geese see God?")
+    print(mystring.palindrom())  # True
+    print(mystring.pythonicPalindrom())  # True
+    print(mystring.iteratorPalindrom())  # True
+
+    mystring = String("Do geese see Godd?")
+    print(mystring.palindrom())  # False
+    print(mystring.pythonicPalindrom())  # False
+    print(mystring.iteratorPalindrom())  # False
