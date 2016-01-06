@@ -1,8 +1,8 @@
 class Nodo():
 
-    def __init__(self, value, nodi):
+    def __init__(self, value):
         self.__value = value
-        self.__adiacenti = nodi
+        self.__adiacenti = set()
 
     def addAdiacente(self, adiacente):
         self.add(adiacente)
@@ -55,10 +55,10 @@ class SocialNetwork():
 
 
 if __name__ == '__main__':
-    nodo1 = Nodo(1, set())
-    nodo2 = Nodo(2, set())
-    nodo3 = Nodo(3, set())
-    nodo4 = Nodo(4, set())
+    nodo1 = Nodo(1)
+    nodo2 = Nodo(2)
+    nodo3 = Nodo(3)
+    nodo4 = Nodo(4)
     setdiprova = {nodo4, nodo2, nodo3}
     # print(nodo1 in setdiprova)
     # print(str(nodo1), str(nodo2))
