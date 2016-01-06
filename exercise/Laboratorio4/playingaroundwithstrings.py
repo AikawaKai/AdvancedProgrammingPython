@@ -30,6 +30,19 @@ class String(str):
                 return False
         return True
 
+    # recursive palindrome
+    def recursivePalindrom(self):
+        lowerself = re.sub("[ ,.;:?!]", "", self.lower())
+        return String.recPal(lowerself)
+
+    def recPal(string):
+        if len(string) <= 1:
+            return True
+        elif string[0] == string[-1]:
+            return String.recPal(string[1:-1])
+        else:
+            return False
+
     def subtract(self, other):
         return ''.join([x for x in self if x not in other])
 
@@ -53,6 +66,7 @@ if __name__ == '__main__':
     print(mystring.palindrom())  # True
     print(mystring.pythonicPalindrom())  # True
     print(mystring.iteratorPalindrom())  # True
+    print(mystring.recursivePalindrom(), end="\n\n")  # True
 
     mystring = String("Do gees see God?")
     print(mystring.palindrom())  # True
