@@ -64,6 +64,4 @@ if __name__ == '__main__':
     social.addAdiacenteToNode(nodo1, nodo4)
     social.addAdiacenteToNode(nodo1, nodo2)
     social.addAdiacenteToNode(nodo2, nodo3)
-
-    #print(str(nodo1), str(nodo3), str(nodo2))
     print(str(social))
