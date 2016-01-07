@@ -11,6 +11,9 @@ class Nodo():
     def add(self, adiacente):
         self.__adiacenti.add(adiacente)
 
+    def getDegree(self):
+        return len(self.__adiacenti)
+
     def getValue(self):
         return self.__value
 

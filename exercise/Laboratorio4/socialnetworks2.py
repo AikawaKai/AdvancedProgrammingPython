@@ -35,15 +35,21 @@ class SocialNetwork():
 
     def visitAll(self):
         iterVisit = Visit(self._firstnode)
+        breadth_first_nodes = []
         for nod in iterVisit:
-            print(nod)
+            breadth_first_nodes.append(nod)
+        return breadth_first_nodes
 
     def __str__(self):
-        self.visitAll()
+        nodes = self.visitAll()
         base = ""
+        for nod in nodes:
+            base += "\nnodo {0}, adiacenti {1}".format(nod.getValue(),
+                                                       [ad.getValue() for ad
+                                                       in nod.getAdiacenti()])
         return base
 
-
+# visita in ampiezza
 class Visit():
     def __init__(self, seed):
         self.__seed = seed
@@ -71,9 +77,7 @@ class Visit():
         else:
             self.__visited.add(currentNode)
             self.__index += 1
-        return currentNode.getValue()
-
-
+        return currentNode
 
 
 if __name__ == '__main__':
@@ -90,3 +94,4 @@ if __name__ == '__main__':
     nodo5.addAdiacente(nodo2)
     social = SocialNetwork(nodo1)
     social.visitAll()
+    print(str(social))
