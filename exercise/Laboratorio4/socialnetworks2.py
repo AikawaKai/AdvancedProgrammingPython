@@ -49,6 +49,7 @@ class SocialNetwork():
                                                        in nod.getAdiacenti()])
         return base
 
+
 # visita in ampiezza
 class Visit():
     def __init__(self, seed):
