@@ -65,7 +65,7 @@ class Visit():
 
     def __next__(self):
         if self.__index >= len(self.__toVisit):
-            raise StopIteration("ToVisit Ended")
+            raise StopIteration
         currentNode = self.__toVisit[self.__index]
         if currentNode.getDegree() > 0:
             adiacenti = currentNode.getAdiacenti()
