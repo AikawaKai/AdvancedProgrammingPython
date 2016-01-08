@@ -13,3 +13,13 @@ def introspect(self):
     return result
 
 C.__str__ = introspect
+
+
+class D():
+    class_attribute = "a value"
+
+    def f(self):
+        return "a function"
+
+    def __call__(self, integer):
+        print("rendo l'istanza chiamabile come funzione {0}".format(integer))
