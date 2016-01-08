@@ -23,3 +23,19 @@ class D():
 
     def __call__(self, integer):
         print("rendo l'istanza chiamabile come funzione {0}".format(integer))
+
+
+class Desc(object):
+    '''Un esempio di descrittore'''
+    def __get__(self, obj, cls=None):
+        print("{0}.__get__({1}, {2})".format(self, obj, cls))
+
+    def __set__(self, obj, val):
+        print("{0}.__set__({1}, {2})".format(self, obj, val))
+
+    def __delete__(self, obj):
+        print("{0}._delete__({1})".format(self, obj))
+
+
+class C1(object):
+    d = Desc()
