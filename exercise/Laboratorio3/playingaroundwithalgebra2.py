@@ -116,9 +116,7 @@ class Ring():
         return(self.__mset, self.__add, self.__i, self.__invAdd, self.__prod)
 
     def setRing(self, mset, add, i, invAdd, prod):
-        print("Sono qui")
         self.__monoid = Monoid(mset, prod, i)
-        print("Superato")
         Ring.checkCommutativity(mset, add)
         self.__group = Group(mset, add, i, invAdd)
         print("È un anello")
