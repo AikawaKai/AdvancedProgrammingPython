@@ -1,6 +1,30 @@
 from iteratorRational import *
 
 
+def genFunc(n):
+    def func(a, b):
+        return (a+b) % n
+    return func
+
+
+class NaturalIterator(object):
+
+    def __init__(self, max):
+        self.__max = max
+
+    def __iter__(self):
+        self.__num = 0
+        return self
+
+    def __next__(self):
+        if self.__num <= self.__max:
+            Num = self.__num
+            self.__num += 1
+            return Num
+        else:
+            raise StopIteration
+
+
 class Monoid(object):
 
     def __init__(self, mset, add, i):
@@ -12,6 +36,7 @@ class Monoid(object):
     def checkIdentity(mset, add, i):
         for elem in mset:
             if elem != add(elem, i):
+                print(elem)
                 return False
         return True
 
@@ -37,3 +62,5 @@ class Monoid(object):
 
 if __name__ == '__main__':
     Monoide = Monoid({True, False}, lambda x, y: x or y, False)
+    integerSet = {i for i in NaturalIterator(100)}
+    Monoide1 = Monoid(integerSet, genFunc(101), 0)
