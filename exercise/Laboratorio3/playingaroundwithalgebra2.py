@@ -31,7 +31,7 @@ class Monoid(object):
         self.setMonoid(mset, add, i, checkValue)
 
     def getMonoid(self):
-        return (self.__set, self.__add, self.__i)
+        return (self.__set, self.__add, self.__i, self.__checkValue)
 
     def checkIdentity(mset, add, i):
         for elem in mset:
@@ -66,12 +66,20 @@ class Monoid(object):
             self.__set = mset
             self.__add = add
             self.__i = i
-
-    monoidProperty = property(getMonoid, setMonoid)
+            self.__checkValue = checkValue
 
 
 class Group(Monoid):
-    pass
+
+    def __init__(self, mset, add, i, checkValue):
+        self.setGroup(mset, add, i, checkValue)
+
+    def getGroup(self):
+        return(self.__mset, self.__add, self.__i, self.__checkValue)
+
+    def setGroup(self, mset, add, i, checkValue):
+        self.__monoid = Monoid(mset, add, i, checkValue)
+
 
 if __name__ == '__main__':
     Monoide = Monoid({True, False}, lambda x, y: x or y, False, lambda x:
