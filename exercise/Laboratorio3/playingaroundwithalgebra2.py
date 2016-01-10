@@ -71,23 +71,26 @@ class Monoid(object):
 
 class Group(Monoid):
 
-    def __init__(self, mset, add, i, checkValue):
-        self.setGroup(mset, add, i, checkValue)
+    def __init__(self, mset, add, i, checkValue, invAdd):
+        self.setGroup(mset, add, i, checkValue, invAdd)
 
     def getGroup(self):
         return(self.__mset, self.__add, self.__i, self.__checkValue)
 
-    def checkInvertibility():
-        pass
+    def checkInvertibility(mset, invAdd, i):
+        for elem in mset:
+            if invAdd(elem) != i:
+                return False
+        return True
 
-    def setGroup(self, mset, add, i, checkValue):
+    def setGroup(self, mset, add, i, checkValue, invAdd):
         if not Group.checkIdentity(mset, add, i):
             raise ValueError("Non è un gruppo: checkIdentity Failed")
         elif not Group.checkAssociativity(mset, add):
             raise ValueError("Non è un gruppo: checkAssociativity Failed")
         elif not Group.checkClosure(mset, add, checkValue):
             raise ValueError("Non è un gruppo: checkClosure")
-        elif not Group.checkInvertibility(mset, add, i):
+        elif not Group.checkInvertibility(mset, invAdd, i):
             raise ValueError("Non è un gruppo: checkInvertibility Failed")
         else:
             print("È un gruppo")
@@ -103,3 +106,11 @@ if __name__ == '__main__':
     integerSet = {i for i in NaturalIterator(100)}
     Monoide1 = Monoid(integerSet, genFunc(101), 0,
                       lambda x: isinstance(x, int))
+    iteratorRational = RandomRational(1, 100, 1, 100)
+    rationals = {rat for rat in iteratorRational}
+    prod = lambda x, y: Rational((x.getNum() * y.getNum()),
+                                 (x.getDen() * y.getDen()))
+    prodInv = lambda x: Rational((x.getNum() * x.getDen()),
+                                 (x.getDen() * x.getNum()))
+    Group1 = Group(rationals, prod, Rational(1, 1),
+                   lambda x: isinstance(x, Rational), prodInv)
