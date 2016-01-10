@@ -151,9 +151,10 @@ if __name__ == '__main__':
     zSet = {z for z in iteratorZ}
     print(zSet)
     #  Ring1 = Ring(zSet, lambda x, y: x+y, 0, lambda x: x-x, lambda x, y: x*y)
-    # Ring1 not a Ring checkIdentity failes
+    # Ring1 not a Ring checkIdentity fails
     mset = {0, 1, 2, 3}
     add = lambda x, y: (x+y) % 4
     invAdd = lambda x: (x+(4-x)) % 4
     prod = lambda x, y: (x*y) % 4
-    Ring2 = Ring(mset, add, 0, invAdd, prod)
+    # Ring2 = Ring(mset, add, 0, invAdd, prod)
+    # Ring2 not a Ring checkIdentity fails
