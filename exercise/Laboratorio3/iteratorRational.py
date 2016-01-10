@@ -31,7 +31,8 @@ class Rational():
 
 class RandomRational():
 
-    def __init__(self, maxvalue, seedvalue):
+    def __init__(self, minvalue, maxvalue, seedvalue):
+        self.__min = minvalue
         self.__max = maxvalue
         self.__seed = seedvalue
 
@@ -40,13 +41,13 @@ class RandomRational():
         return self
 
     def __next__(self):
-        randomIntegerNum = random.randint(0, self.__max)
-        randomIntegerDen = random.randint(1, self.__max)
+        randomIntegerNum = random.randint(self.__min, self.__max)
+        randomIntegerDen = random.randint(self.__min, self.__max)
         return Rational(randomIntegerNum, randomIntegerDen)
 
 
 if __name__ == '__main__':
-    iteratorRational = RandomRational(100, 1)
+    iteratorRational = RandomRational(1, 100, 1)
     for i in range(0, 100):
         RationalTemp = next(iteratorRational)
         print(RationalTemp)
