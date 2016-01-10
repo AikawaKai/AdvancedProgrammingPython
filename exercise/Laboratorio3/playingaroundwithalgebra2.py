@@ -77,8 +77,24 @@ class Group(Monoid):
     def getGroup(self):
         return(self.__mset, self.__add, self.__i, self.__checkValue)
 
+    def checkInvertibility():
+        pass
+
     def setGroup(self, mset, add, i, checkValue):
-        self.__monoid = Monoid(mset, add, i, checkValue)
+        if not Group.checkIdentity(mset, add, i):
+            raise ValueError("Non è un gruppo: checkIdentity Failed")
+        elif not Group.checkAssociativity(mset, add):
+            raise ValueError("Non è un gruppo: checkAssociativity Failed")
+        elif not Group.checkClosure(mset, add, checkValue):
+            raise ValueError("Non è un gruppo: checkClosure")
+        elif not Group.checkInvertibility(mset, add, i):
+            raise ValueError("Non è un gruppo: checkInvertibility Failed")
+        else:
+            print("È un gruppo")
+            self.__set = mset
+            self.__add = add
+            self.__i = i
+            self.__checkValue = checkValue
 
 
 if __name__ == '__main__':

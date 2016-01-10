@@ -4,6 +4,8 @@ import random
 class Rational():
 
     def __init__(self, num, den):
+        if num == den:
+            den = num = 1
         self.setNum(num)
         self.setDen(den)
 
@@ -18,7 +20,7 @@ class Rational():
 
     def setDen(self, den):
         if den == 0:
-            self.__den = 1
+            raise ValueError("Divisione per zero")
         else:
             self.__den = den
 
