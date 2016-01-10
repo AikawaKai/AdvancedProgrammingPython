@@ -27,8 +27,8 @@ class NaturalIterator(object):
 
 class Monoid(object):
 
-    def __init__(self, mset, add, i):
-        self.setMonoid(mset, add, i)
+    def __init__(self, mset, add, i, checkValue):
+        self.setMonoid(mset, add, i, checkValue)
 
     def getMonoid(self):
         return (self.__set, self.__add, self.__i)
@@ -40,6 +40,13 @@ class Monoid(object):
                 return False
         return True
 
+    def checkClosure(mset, add, checkValue):
+        couples = [(a, b) for a in mset for b in mset]
+        for a, b in couples:
+            if not checkValue(add(a, b)):
+                return False
+        return True
+
     def checkAssociativity(mset, add):
         triple = [(a, b, c) for a in mset for b in mset for c in mset]
         for a, b, c in triple:
@@ -47,11 +54,13 @@ class Monoid(object):
                 return False
         return True
 
-    def setMonoid(self, mset, add, i):
+    def setMonoid(self, mset, add, i, checkValue):
         if not Monoid.checkIdentity(mset, add, i):
             raise ValueError("Non è un monoide: checkIdentity Failed")
         elif not Monoid.checkAssociativity(mset, add):
             raise ValueError("Non è un monoide: checkAssociativity Failed")
+        elif not Monoid.checkClosure(mset, add, checkValue):
+            raise ValueError("Non è un monoide: checkClosure")
         else:
             print("È un monoide")
             self.__set = mset
@@ -60,7 +69,13 @@ class Monoid(object):
 
     monoidProperty = property(getMonoid, setMonoid)
 
+
+class Group(Monoid):
+    pass
+
 if __name__ == '__main__':
-    Monoide = Monoid({True, False}, lambda x, y: x or y, False)
+    Monoide = Monoid({True, False}, lambda x, y: x or y, False, lambda x:
+                     isinstance(x, bool))
     integerSet = {i for i in NaturalIterator(100)}
-    Monoide1 = Monoid(integerSet, genFunc(101), 0)
+    Monoide1 = Monoid(integerSet, genFunc(101), 0,
+                      lambda x: isinstance(x, int))
