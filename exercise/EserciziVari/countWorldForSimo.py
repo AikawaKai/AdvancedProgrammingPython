@@ -9,6 +9,7 @@ def firstWordArray(listOfWords):
         if listOfWords[i] in dictionary:
             return listOfWords[i:]
 
+
 def countWords(listOfWords, word):
     if len(listOfWords) > 0:
         if listOfWords[0] in dictionary:
