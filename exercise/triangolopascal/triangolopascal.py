@@ -1,5 +1,4 @@
 from functools import reduce
-from math import ceil
 
 
 def fact(n):
