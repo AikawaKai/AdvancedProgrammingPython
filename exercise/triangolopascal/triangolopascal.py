@@ -25,9 +25,9 @@ class Row():
 
     def __init__(self, n):
         self.n = n
+        self.count = 0
 
     def __iter__(self):
-        self.count = 0
         return self
 
     def __next__(self):
@@ -40,20 +40,19 @@ class Row():
             return kvalue
 
     def prev(self):
-        if self.count<= 0:
+        if self.count == 0:
             raise StopIteration
         self. count -= 1
-        toRet = binomiale(self.n, self.count)
-        return toRet
+        return binomiale(self.n, self.count)
 
 
 class Pascal():
 
     def __init__(self, maxrow):
         self.maxrow = maxrow
+        self.count = 0
 
     def __iter__(self):
-        self.count = 0
         return self
 
     def __next__(self):
@@ -63,6 +62,13 @@ class Pascal():
             iterator = Row(self.count)
             self.count += 1
             return iterator
+
+    def prev(self):
+        if self.count == 0:
+            raise StopIteration
+        else:
+            self.count -= 1
+            return Row(self.count)
 
 
 if __name__ == '__main__':
@@ -74,16 +80,19 @@ if __name__ == '__main__':
     pascal = Pascal(6)
     n = 6
     for row in pascal:
-        for elem in row:
-            print(" {0} ".format(elem), end="")
+        for e in row:
+            print(" {0} ".format(e), end="")
         print("")
 
     row = Row(4)
-    elemInRow = [elem for elem in row]
+    elemInRow = [e1 for e1 in row]
     print(elemInRow)
     print(row.prev())
     print(row.prev())
     print(row.prev())
     print(row.prev())
     print(row.prev())
-    print(row.prev())
+    iterators = Pascal(5)
+    print([elem for elem in next(iterators)])
+    next(iterators)
+    print([elem for elem in iterators.prev()])
