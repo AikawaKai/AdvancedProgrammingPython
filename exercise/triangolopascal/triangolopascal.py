@@ -39,6 +39,13 @@ class Row():
             kvalue = binomiale(self.n, k)
             return kvalue
 
+    def prev(self):
+        if self.count<= 0:
+            raise StopIteration
+        self. count -= 1
+        toRet = binomiale(self.n, self.count)
+        return toRet
+
 
 class Pascal():
 
@@ -70,3 +77,13 @@ if __name__ == '__main__':
         for elem in row:
             print(" {0} ".format(elem), end="")
         print("")
+
+    row = Row(4)
+    elemInRow = [elem for elem in row]
+    print(elemInRow)
+    print(row.prev())
+    print(row.prev())
+    print(row.prev())
+    print(row.prev())
+    print(row.prev())
+    print(row.prev())
