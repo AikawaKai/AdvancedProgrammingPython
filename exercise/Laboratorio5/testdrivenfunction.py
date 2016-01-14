@@ -13,6 +13,10 @@ def anagram(string):
         return False
 
 
+def validate(string):
+    return (None, None)
+
+
 class CheckAnagram(TestCase):
 
     def testCheckTruePalindrom(self):
@@ -23,6 +27,13 @@ class CheckAnagram(TestCase):
         self.assertEqual(False, anagram("Do geese seeee God?"))
         self.assertEqual(False, anagram("Rise to vote, sirasdas."))
 
+
+class CheckValidate(TestCase):
+
+    def testValidConfiguration(self):
+        (winner, moves) = validate("XXXOOXOO")
+        self.assertEqual('X', winner)
+        self.assertEqual('no moves', moves)
 
 if __name__ == '__main__':
     main()
