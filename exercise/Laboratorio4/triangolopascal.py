@@ -1,6 +1,3 @@
-import copy
-
-
 class Pascal(object):
 
     def __init__(self, _max):
@@ -16,7 +13,7 @@ class Pascal(object):
             raise StopIteration
         else:
             retRow = Row(self.prevList, self.count)
-            retRow1 = copy.deepcopy(retRow)
+            retRow1 = Row(self.prevList, self.count)
             self.prevList = [elem for elem in retRow]
             self.count += 1
             return retRow1
