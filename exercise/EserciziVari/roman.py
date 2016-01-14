@@ -6,8 +6,19 @@ converting_value = ((1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'),
                     (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I'))
 
 
+class OutOfRangeError(Exception):
+
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
+
 def toRoman(number):
     string = ""
+    if number >= 4000 or number <= 0:
+        raise OutOfRangeError("out of range")
     for number1, roman in converting_value:
         while number >= number1:
             string += roman
@@ -25,8 +36,16 @@ class RomanCaseTest(TestCase):
     def test_to_roman_know_values(self):
         for number, roman1 in self.know_values:
             roman2 = toRoman(number)
-            print(roman1, roman2)
             self.assertEqual(roman1, roman2)
+
+    def test_too_large(self):
+        self.assertRaises(OutOfRangeError, toRoman, 4000)
+
+    def test_equals_zero(self):
+        self.assertRaises(OutOfRangeError, toRoman, 0)
+
+    def test_no_negatives(self):
+        self.assertRaises(OutOfRangeError, toRoman, -1)
 
 
 if __name__ == '__main__':
