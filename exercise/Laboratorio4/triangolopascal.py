@@ -1,3 +1,6 @@
+import sys
+
+
 class Pascal(object):
 
     def __init__(self, _max):
@@ -56,7 +59,7 @@ class Row(object):
 
 
 if __name__ == '__main__':
-    pascal = Pascal(10)
+    pascal = Pascal(int(sys.argv[1]))
     for iterator in pascal:
         for elem in iterator:
             print(elem, end=" ")
