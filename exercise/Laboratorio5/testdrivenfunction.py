@@ -15,15 +15,31 @@ def anagram(string):
 victoryposition = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7),
                    (2, 5, 8), (0, 4, 8), (2, 4, 6))
 
+opposite = {'X': 'O', 'O': 'X'}
+
+
+def checkvictory(string, elem):
+    for pos1, pos2, pos3 in victoryposition:
+        if string[pos1] == string[pos2] == string[pos3] == elem:
+            return True
+
 
 def validate(string):
     if len(string) > 9 or abs(string.count('X') - string.count('O')) > 1:
-        return (False, None, None)
+        return (False, None)
+
+    x = checkvictory(string, 'X')
+    o = checkvictory(string, 'O')
+    if x and o:
+        return (False, None)
+    elif x:
+        return ('X', 'no moves') if string.count('O') <= string.count('X') else (False, None)
+    elif o:
+        return ('O', 'no moves') if string.count('X') <= string.count('O') else (False, None)
+    if(len(string) == 9):
+        return (True, 'even')
     else:
-        for pos1, pos2, pos3 in victoryposition:
-            if string[pos1] == string[pos2] == string[pos3]:
-                return (True, string[pos1], 'no moves')
-        return (True, None, 'moves')
+        return (True, 'moves')
 
 
 class CheckAnagram(TestCase):
@@ -40,28 +56,32 @@ class CheckAnagram(TestCase):
 class CheckValidate(TestCase):
 
     def testValidConfiguration(self):
-        (correct, winner, moves) = validate("XXXOOXOO")
-        self.assertEqual(True, correct)
+        (winner, moves) = validate("XXXOOXOO ")
         self.assertEqual('X', winner)
         self.assertEqual('no moves', moves)
-        (correct, winner, moves) = validate("XO OXOXOX")
+        (winner, moves) = validate("XO OXOXOX")
         self.assertEqual('X', winner)
         self.assertEqual('no moves', moves)
-        (correct, winner, moves) = validate("OOOXXOXX")
-        self.assertEqual(True, correct)
+        (winner, moves) = validate("OOOXXOXX ")
         self.assertEqual('O', winner)
         self.assertEqual('no moves', moves)
-        (correct, winner, moves) = validate("OX XOXOXO")
+        (winner, moves) = validate("OX XOXOXO")
         self.assertEqual('O', winner)
         self.assertEqual('no moves', moves)
 
     def testNonValidConfiguration(self):
-        (correct, winner, moves) = validate("XXXOOXOOOOO")
-        self.assertEqual(False, correct)
-        (correct, winner, moves) = validate("XXXOOOOO")
-        self.assertEqual(False, correct)
-        (correct, winner, moves) = validate("XXXOOOOO")
-        self.assertEqual(False, correct)
+        (winner, moves) = validate("XXXOOXOOOOO")
+        self.assertEqual(False, winner)
+        (winner, moves) = validate("XXXOOOOO")
+        self.assertEqual(False, winner)
+        (winner, moves) = validate("XXXOOOOO")
+        self.assertEqual(False, winner)
+        (winner, moves) = validate("XOOOXOXOX")
+        self.assertEqual(False, winner)
+        (winner, moves) = validate("O  XXXOOO")
+        self.assertEqual(False, winner)
+        (winner, moves) = validate("O  OOOXXX")
+        self.assertEqual(False, winner)
 
     def testNoMovesConfiguration(self):
         pass
