@@ -12,9 +12,18 @@ def anagram(string):
     else:
         return False
 
+victoryposition = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7),
+                   (2, 5, 8), (0, 4, 8), (2, 4, 6))
+
 
 def validate(string):
-    return (None, None)
+    if len(string) > 9 or abs(string.count('X') - string.count('O')) > 1:
+        return (False, None, None)
+    else:
+        for pos1, pos2, pos3 in victoryposition:
+            if string[pos1] == string[pos2] == string[pos3]:
+                return (True, string[pos1], 'no moves')
+        return (True, None, 'moves')
 
 
 class CheckAnagram(TestCase):
@@ -31,9 +40,31 @@ class CheckAnagram(TestCase):
 class CheckValidate(TestCase):
 
     def testValidConfiguration(self):
-        (winner, moves) = validate("XXXOOXOO")
+        (correct, winner, moves) = validate("XXXOOXOO")
+        self.assertEqual(True, correct)
         self.assertEqual('X', winner)
         self.assertEqual('no moves', moves)
+        (correct, winner, moves) = validate("XO OXOXOX")
+        self.assertEqual('X', winner)
+        self.assertEqual('no moves', moves)
+        (correct, winner, moves) = validate("OOOXXOXX")
+        self.assertEqual(True, correct)
+        self.assertEqual('O', winner)
+        self.assertEqual('no moves', moves)
+        (correct, winner, moves) = validate("OX XOXOXO")
+        self.assertEqual('O', winner)
+        self.assertEqual('no moves', moves)
+
+    def testNonValidConfiguration(self):
+        (correct, winner, moves) = validate("XXXOOXOOOOO")
+        self.assertEqual(False, correct)
+        (correct, winner, moves) = validate("XXXOOOOO")
+        self.assertEqual(False, correct)
+        (correct, winner, moves) = validate("XXXOOOOO")
+        self.assertEqual(False, correct)
+
+    def testNoMovesConfiguration(self):
+        pass
 
 if __name__ == '__main__':
     main()
