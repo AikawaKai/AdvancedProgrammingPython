@@ -25,7 +25,7 @@ def checkvictory(string, elem):
 
 
 def validate(string):
-    if len(string) > 9 or abs(string.count('X') - string.count('O')) > 1:
+    if not len(string) == 9 or abs(string.count('X') - string.count('O')) > 1:
         return (False, None)
     x = checkvictory(string, 'X')
     o = checkvictory(string, 'O')
@@ -35,7 +35,7 @@ def validate(string):
         return ('X', 'no moves') if string.count('O') <= string.count('X') else (False, None)
     elif o:
         return ('O', 'no moves') if string.count('X') <= string.count('O') else (False, None)
-    if(len(string) == 9):
+    if " " not in string:
         return (True, 'even')
     else:
         return (True, 'moves')
@@ -81,9 +81,17 @@ class CheckValidate(TestCase):
         self.assertEqual(False, winner)
         (winner, moves) = validate("O  OOOXXX")
         self.assertEqual(False, winner)
+        (winner, moves) = validate("OOOOXXX")
+        self.assertEqual(False, winner)
 
-    def testNoMovesConfiguration(self):
-        pass
+    def testMovesConfiguration(self):
+        (winner, moves) = validate("XOXOXXOXO")
+        self.assertEqual(winner, True)
+        self.assertEqual(moves, 'even')
+        (winner, moves) = validate("XOXOO XXO")
+        self.assertEqual(winner, True)
+        self.assertEqual(moves, 'moves')
+
 
 if __name__ == '__main__':
     main()
