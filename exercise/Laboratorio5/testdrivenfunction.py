@@ -27,7 +27,6 @@ def checkvictory(string, elem):
 def validate(string):
     if len(string) > 9 or abs(string.count('X') - string.count('O')) > 1:
         return (False, None)
-
     x = checkvictory(string, 'X')
     o = checkvictory(string, 'O')
     if x and o:
