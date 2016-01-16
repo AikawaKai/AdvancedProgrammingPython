@@ -13,9 +13,11 @@ class TestGeography(TestCase):
     def testNeighbor(self):
         geog = Geography(couples)
         italyNeigh = sorted(geog.neighbors('Italy'))
-        self.assertEquals(["Croatia", "France", "Switzerland"], italyNeigh)
+        self.assertEqual(["Croatia", "France", "Switzerland"], italyNeigh)
         franceNeigh = sorted(geog.neighbors('France'))
-        self.assertEquals(["Belgium", "Germany", "Italy", "Switzerland"], franceNeigh)
+        self.assertEqual(["Belgium", "Germany", "Italy", "Switzerland"], franceNeigh)
+        belgiumNeigh = sorted(geog.neighbors('Belgium'))
+        self.assertEqual(["France", "Germany"], belgiumNeigh)
 
 if __name__ == '__main__':
     main()
