@@ -1,6 +1,7 @@
 import re
 from unittest import TestCase
 from unittest import main
+from pluralize import pluralizeFun
 
 
 def anagram(string):
@@ -91,6 +92,18 @@ class CheckValidate(TestCase):
         (winner, moves) = validate("XOXOO XXO")
         self.assertEqual(winner, True)
         self.assertEqual(moves, 'moves')
+
+    def testPluralizeFun(self):
+        plural = pluralizeFun("cat")
+        self.assertEqual(plural, "cats")
+        plural = pluralizeFun("potato")
+        self.assertEqual(plural, "potatoes")
+        plural = pluralizeFun("baby")
+        self.assertEqual(plural, "babies")
+        plural = pluralizeFun("box")
+        self.assertEqual(plural, "boxes")
+        plural = pluralizeFun("match")
+        self.assertEqual(plural, "matches")
 
 
 if __name__ == '__main__':
