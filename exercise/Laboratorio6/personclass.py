@@ -71,6 +71,13 @@ class Worker(Person):
     month_salary = property(_getSalaryMonth, None, None, "get monthy salary")
     year_salary = property(_getYearSalary, None, None, "get year salary")
 
+
+class Wizard(Person):
+
+    def __init__(self, name, lastname, birthday, age):
+        super(Wizard, self).__init__(name, lastname, birthday)
+        self.age = age
+
 if __name__ == '__main__':
     person = Person("Marco", "Odore", date(1985, 10, 27))
     sameperson = eval(repr(person))
