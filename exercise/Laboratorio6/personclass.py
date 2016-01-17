@@ -51,6 +51,7 @@ if __name__ == '__main__':
                 ("Tecnocivismo", 28), ("Basi di dati", 23),
                 ("Progr. funzionale", 25), ("ArchitetturaI", 25),
                 ("ArchitetturaII", 24), ("Crittografia", 30),
-                ("Linguaggi formali", 25), ("Prog. Software", 24)]
+                ("Linguaggi formali", 25), ("Prog. Software", 24),
+                ("Fisica", 24), ("Reti Calcolatori", 26)]
     student = Student("Marco", "Odore", date(1985, 10, 27), lectmark)
     print(student.grade_average)
