@@ -26,6 +26,9 @@ class Person(object):
     def setBirthday(self, newbirthday):
         self.birthday = newbirthday
 
+    def __repr__(self):
+        return "Person('{0}', '{1}', date({2}, {3}, {4}))".format(self.name, self.lastname, self.birthday.year, self.birthday.month, self.birthday.day)
+
 
 class Student(Person):
 
@@ -69,6 +72,8 @@ class Worker(Person):
     year_salary = property(_getYearSalary, None, None, "get year salary")
 
 if __name__ == '__main__':
+    person = Person("Marco", "Odore", date(1985, 10, 27))
+    print(repr(person))
     lectmark = [("Matematica1", 24), ("Matematica2", 27), ("Statistica", 30),
                 ("Programmazione", 27), ("Sistemi Operativi", 27),
                 ("Tecnocivismo", 28), ("Basi di dati", 23),
