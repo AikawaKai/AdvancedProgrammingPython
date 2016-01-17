@@ -74,9 +74,17 @@ class Worker(Person):
 
 class Wizard(Person):
 
-    def __init__(self, name, lastname, birthday, age):
+    def __init__(self, name, lastname, birthday):
         super(Wizard, self).__init__(name, lastname, birthday)
-        self.age = age
+
+    def _getPassedDay(self):
+        return 0
+
+    def _setNewAge(self, date):
+        self.birthday = date
+
+    age = property(_getPassedDay, _setNewAge, None, "Magick aging")
+
 
 if __name__ == '__main__':
     person = Person("Marco", "Odore", date(1985, 10, 27))
