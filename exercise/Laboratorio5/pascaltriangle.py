@@ -56,3 +56,15 @@ class Row(object):
         self.index2 += 1
         self.count += 1
         return valueToNext
+
+    def prev(self):
+        if self.count == 0:
+            raise StopIteration
+        if self.n == 0:
+            self.count -= 1
+            return 1
+        self.index1 -= 1
+        self.index2 -= 1
+        self.count -= 1
+        valueToNext = self._returnValueFromList(self.index1) + self._returnValueFromList(self.index2)
+        return valueToNext
