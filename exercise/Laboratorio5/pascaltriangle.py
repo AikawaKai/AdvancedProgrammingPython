@@ -3,7 +3,7 @@ class PascalTriangle(object):
     def __init__(self, n):
         self.count = 0
         self.n = n
-        self.prevlist = []
+        self.prevList = [[]]
 
     def __iter__(self):
         return self
@@ -11,11 +11,19 @@ class PascalTriangle(object):
     def __next__(self):
         if self.count >= self.n:
             raise StopIteration
-        rowToNext = Row(self.prevlist, self.count)
-        rowToSave = Row(self.prevlist, self.count)
-        self.prevlist = [elem for elem in rowToSave]
+        rowToNext = Row(self.prevList[self.count], self.count)
+        rowToSave = Row(self.prevList[self.count], self.count)
         self.count += 1
+        if(len(self.prevList) <= self.count):
+            self.prevList.append([elem for elem in rowToSave])
         return rowToNext
+
+    def prev(self):
+        if self.count < 0:
+            raise StopIteration
+        self.count -= 1
+        rowToPrev = Row(self.prevList[self.count], self.count)
+        return rowToPrev
 
 
 class Row(object):
