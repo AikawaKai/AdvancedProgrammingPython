@@ -45,6 +45,29 @@ class Student(Person):
     grade_average = property(_getAverageGrade, None, None, "Average grade")
 
 
+class Worker(Person):
+
+    def __init__(self, name, lastname, date, pay_per_hour):
+        super(Worker, self).__init__(name, lastname, date)
+        self.pay_per_hour = pay_per_hour
+
+    def _getSalaryDay(self):
+        return self.pay_per_hour * 8
+
+    def _getSalaryWeek(self):
+        return self.day_salary * 5
+
+    def _getSalaryMonth(self):
+        return self.week_salary * 4
+
+    def _getYearSalary(self):
+        return self.month_salary * 12
+
+    day_salary = property(_getSalaryDay, None, None, "get day salary")
+    week_salary = property(_getSalaryWeek, None, None, "get week salary")
+    month_salary = property(_getSalaryMonth, None, None, "get monthy salary")
+    year_salary = property(_getYearSalary, None, None, "get year salary")
+
 if __name__ == '__main__':
     lectmark = [("Matematica1", 24), ("Matematica2", 27), ("Statistica", 30),
                 ("Programmazione", 27), ("Sistemi Operativi", 27),
@@ -54,4 +77,9 @@ if __name__ == '__main__':
                 ("Linguaggi formali", 25), ("Prog. Software", 24),
                 ("Fisica", 24), ("Reti Calcolatori", 26)]
     student = Student("Marco", "Odore", date(1985, 10, 27), lectmark)
-    print(student.grade_average)
+    print("Average grade: ", student.grade_average)
+    worker = Worker("Marco", "Odore", date(1985, 10, 27), 8)
+    print("day: ", worker.day_salary)
+    print("week: ", worker.week_salary)
+    print("month: ", worker.month_salary)
+    print("year: ", worker.year_salary)
