@@ -73,7 +73,8 @@ class Worker(Person):
 
 if __name__ == '__main__':
     person = Person("Marco", "Odore", date(1985, 10, 27))
-    print(repr(person))
+    sameperson = eval(repr(person))
+    print(repr(person), repr(sameperson))
     lectmark = [("Matematica1", 24), ("Matematica2", 27), ("Statistica", 30),
                 ("Programmazione", 27), ("Sistemi Operativi", 27),
                 ("Tecnocivismo", 28), ("Basi di dati", 23),
