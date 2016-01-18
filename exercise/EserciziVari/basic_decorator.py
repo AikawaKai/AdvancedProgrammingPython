@@ -71,6 +71,37 @@ def anotherF(string):
     print("string: {0}".format(string))
 
 
+def classDecorator(cls):
+    class Wrapper(object):
+
+        def __init__(self, *args):
+            print("sto creando la classe")
+            self.wrapped = cls(*args)
+
+        def __getattr__(self, name):
+            print("sto facendo una get su di un attributo: {0}".format(name))
+            return getattr(self.wrapped, name)
+
+        def __setattr__(self, name, value):
+            print("sto settando l'attributo {0} con il valore {1}".format(name, value))
+            if name == "wrapped":
+                self.__dict__[name] = value
+            else:
+                setattr(self.wrapped, name, value)
+    return Wrapper
+
+
+@classDecorator
+class ClassToExtend(object):
+
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+    def sum(self):
+        return self.a + self.b
+
+
 if __name__ == '__main__':
     sys.setrecursionlimit = 100000000000
     miafunc("ciao")
@@ -80,3 +111,4 @@ if __name__ == '__main__':
     print(callFact(200))
     print(callFactIter(200))
     anotherF("stringa da stampare")
+    ClassToExtend(10, 12)
