@@ -78,7 +78,8 @@ class Wizard(Person):
         super(Wizard, self).__init__(name, lastname, birthday)
 
     def _getPassedDay(self):
-        return 0
+        today = date.today()
+        return (today - self.birthday).days
 
     def _setNewAge(self, date):
         self.birthday = date
@@ -104,3 +105,9 @@ if __name__ == '__main__':
     print("week: ", worker.week_salary)
     print("month: ", worker.month_salary)
     print("year: ", worker.year_salary)
+    wizard = Wizard("Marco", "Odore", date(1985, 10, 27))
+    print("Real age in days", wizard.age)
+    wizard.age = date(1990, 10, 27)
+    print("Rejuvenating", wizard.age)  # rejuvenating
+    wizard.age = date(1970, 10, 27)
+    print("Getting old", wizard.age)  # getting old
