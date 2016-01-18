@@ -1,7 +1,7 @@
 class MyMath(object):
 
     def fib(n):
-        return 1 if n <= 1 else MyMath.fib(n-1) + MyMath.fib(n-2)
+        return 0 if n == 0 else (1 if n <= 2 else MyMath.fib(n-1) + MyMath.fib(n-2))
 
     def fact(n):
         return 1 if n <= 1 else n * MyMath.fact(n-1)
