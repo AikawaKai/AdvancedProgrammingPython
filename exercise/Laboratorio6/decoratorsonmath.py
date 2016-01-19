@@ -29,15 +29,25 @@ def logging(f):
     return wrapper
 
 
+def stack_trace(f):
+    def wrapper(*args):
+        string = stringPreparer(f.__name__, args)
+        print(string, end="\n\t")
+        return f(*args)
+    return wrapper
+
+
 class MyMath(object):
 
-    # @memoization
-    @logging
+    #  @memoization
+    #  @logging
+    @stack_trace
     def fib(n):
         return 0 if n == 0 else (1 if n <= 2 else MyMath.fib(n-1) + MyMath.fib(n-2))
 
-    # @memoization
-    @logging
+    #  @memoization
+    #  @logging
+    @stack_trace
     def fact(n):
         return 1 if n <= 1 else n * MyMath.fact(n-1)
 
