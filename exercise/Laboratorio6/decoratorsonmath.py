@@ -13,13 +13,31 @@ def memoization(f):
     return wrapper
 
 
+def stringPreparer(funcName, args):
+    base = funcName + "("
+    args = map(lambda x: str(x), args)
+    content = ", ".join(args)
+    return base + content + ")\n"
+
+
+def logging(f):
+    def wrapper(*args):
+        out_file = open(f.__name__, "a")
+        string = stringPreparer(f.__name__, args)
+        out_file.write(string)
+        return f(*args)
+    return wrapper
+
+
 class MyMath(object):
 
-    @memoization
+    # @memoization
+    @logging
     def fib(n):
         return 0 if n == 0 else (1 if n <= 2 else MyMath.fib(n-1) + MyMath.fib(n-2))
 
-    @memoization
+    # @memoization
+    @logging
     def fact(n):
         return 1 if n <= 1 else n * MyMath.fact(n-1)
 
