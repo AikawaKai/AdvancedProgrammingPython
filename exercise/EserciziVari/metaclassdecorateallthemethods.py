@@ -27,7 +27,7 @@ class Counter():
 
     def __call__(self, *args):
         self.count += 1
-        print("Chiamata {0} volte".format(self.count))
+        print("{1} chiamata {0} volte".format(self.count, self.fun.__name__))
         return self.fun(*args)
 
 
@@ -38,3 +38,13 @@ def counter(fun):
         print("{0} Eseguita {1} volte".format(fun.__name__, fun.count))
         return fun(*args)
     return wrapper
+
+
+@Counter
+def printer():
+    print("Ciao")
+
+
+if __name__ == '__main__':
+    printer()
+    printer()
