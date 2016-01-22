@@ -25,17 +25,18 @@ class Counter():
         self.fun = fun
         self.count = 0
 
-    def __call__(self, *args):
+    def __call__(self, *args, **kwargs):
+        print("args:", self, *args, **kwargs)
         self.count += 1
-        print("{1} chiamata {0} volte".format(self.count, self.fun.__name__))
-        return self.fun(*args)
+        print("{0} Executed {1} times".format(self.fun.__name__, self.count))
+        return self.fun(*args, **kwargs)
 
 
 def counter(fun):
     fun.count = 0
     def wrapper(*args):
         fun.count += 1
-        print("{0} Eseguita {1} volte".format(fun.__name__, fun.count))
+        print("{0} Executed {1} times".format(fun.__name__, fun.count))
         return fun(*args)
     return wrapper
 

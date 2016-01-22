@@ -1,7 +1,7 @@
 from metaclassdecorateallthemethods import *
 
 
-class Account(object, metaclass=decorateAll(counter)):
+class Account(object, metaclass=decorateAll(Counter)):
 
     def __init__(self, initial_amount):
         self.amount = initial_amount
