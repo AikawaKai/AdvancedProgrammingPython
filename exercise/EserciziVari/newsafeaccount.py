@@ -1,4 +1,7 @@
-class Account(object):
+from metaclassdecorateallthemethods import *
+
+
+class Account(object, metaclass=decorateAll(counter)):
 
     def __init__(self, initial_amount):
         self.amount = initial_amount
@@ -34,4 +37,4 @@ if __name__ == '__main__':
     print(acc.balance())
     accSafe = SafeAccount(100)
     print(acc.balance())
-    accSafe.withdraw(150)
+    accSafe.withdraw(50)
