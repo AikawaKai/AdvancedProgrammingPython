@@ -24,10 +24,17 @@ def addingArg(fun):
     return wrapper
 
 
+def myinit(self, name, cognome, data, pay_per_hour):
+    self.name = name
+    self.cognome = cognome
+    self.data = data
+    self.pay_per_hour = pay_per_hour
+
+
 class Spell(type):
 
     def __new__(meta, classname, supers, classdict):
-        classdict["pay_per_hour"] = 10
+        classdict["__init__"] = myinit
         classdict["day_salary"] = property(getSalaryDay, None, None, "day salary")
         classdict["week_salary"] = property(getSalaryWeek, None, None, "week salary")
         classdict["month_salary"] = property(getSalaryMonth, None, None, "month_salary")
@@ -65,5 +72,5 @@ class Person(object, metaclass=Spell):
 
 
 if __name__ == '__main__':
-    person = Person("Marco", "Odore", date(1985, 10, 27))
+    person = Person("Marco", "Odore", date(1985, 10, 27), 10)
     print(person.day_salary, person.week_salary, person.month_salary, person.year_salary)
