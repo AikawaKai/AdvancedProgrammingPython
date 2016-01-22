@@ -38,3 +38,5 @@ if __name__ == '__main__':
     seconda = NaiveClass(10, 12)
     print(prima.doSomthing(), prima.doSomthing())
     print(seconda.doSomthing(), seconda.doSomthing())
+    print(prima.doSomthing1(), prima.doSomthing1())
+    print(seconda.doSomthing1(), seconda.doSomthing1())
