@@ -13,6 +13,7 @@ def formatting(line, token):
         listLine = listLine[diff-1:]
         line = "".join(listLine)
         indexT = line.index(token)
+        whitespaces = ""
     diff = (len(line) - indexT) -40
     if diff > 0:
         listLine = list(line)
