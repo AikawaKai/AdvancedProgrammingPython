@@ -44,11 +44,22 @@ class GeneratePrime(object):
         self.index += 1
         return toReturn
 
+iterator = GeneratePrime(100)
+
+
+def goldbach(n):
+    listOfPrimeToN = []
+    for num in iterator:
+        if num > n:
+            break
+        listOfPrimeToN.append(num)
+    print(listOfPrimeToN)
+
 
 if __name__ == '__main__':
     print(list(filter(isPrime, [elem for elem in range(0, 100)])))
-    iterator = GeneratePrime(100)
-    print([elem for elem in iterator])
-    print("la cache 1° iterazione", iterator.getCache())
-    print([elem for elem in iterator])
-    print("la cache 2° iterazione", iterator.getCache())
+    goldbach(4)
+    goldbach(6)
+    goldbach(8)
+    goldbach(10)
+    goldbach(12)
