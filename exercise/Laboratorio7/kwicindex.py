@@ -22,10 +22,6 @@ def formatting(line, token):
         whitespaces = generateWhiteSpaces(40-6-indexT)
     return (line, whitespaces)
 
-
-
-
-
 class IterFile(object):
 
     def __init__(self, fileToOpen):
