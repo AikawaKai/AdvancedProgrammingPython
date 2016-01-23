@@ -1,8 +1,10 @@
 def cleaning(string):
     return " ".join(string.split())
 
+
 def generateWhiteSpaces(lenght):
     return "".join([" " for i in range(lenght)])
+
 
 def formatting(line, token):
     indexT = line.index(token)
@@ -21,6 +23,7 @@ def formatting(line, token):
         line = "".join(listLine)
         indexT = line.index(token)
     return (line, whitespaces)
+
 
 class IterFile(object):
 

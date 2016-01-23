@@ -51,7 +51,7 @@ iterator = GeneratePrime(100)
 def goldbach(n):
     listOfPrimeToN = []
     for num in iterator:
-        if num > n:
+        if num >= n:
             break
         listOfPrimeToN.append(num)
     listToCheck = list(comb(listOfPrimeToN, 2))
@@ -77,4 +77,4 @@ if __name__ == '__main__':
     print(goldbach(8))
     print(goldbach(10))
     print(goldbach(12))
-    print(goldbach_list(4, 19))
+    print(goldbach_list(4, 100))
