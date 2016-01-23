@@ -25,6 +25,7 @@ def formatting(line, token):
     return (line, whitespaces)
 
 
+# not necessary
 class IterFile(object):
 
     def __init__(self, fileToOpen):
