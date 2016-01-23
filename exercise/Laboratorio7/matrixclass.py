@@ -24,6 +24,14 @@ class Matrix(object):
     def getLenColumn(self):
         return self.m
 
+    def sumMatrix(self, other):
+        if self.getLenRow() == other.getLenRow() and self.getLenColumn() == other.getLenColumn():
+            otherM = other.getMatrix()
+            matrix = [[self.matrix[i][j] + otherM[i][j] for j in range(self.getLenColumn())] for i in range(self.getLenRow())]
+            return Matrix(matrix)
+        else:
+            return False
+
     def __eq__(self, othermatrix):
         return True if self.matrix == othermatrix.getMatrix() else False
 
@@ -50,3 +58,4 @@ if __name__ == '__main__':
     print(matrix)
     print(matrix1.getMatrix())
     print(matrix3.getMatrix())  # reference to matrix
+    print(matrix3.sumMatrix(matrix1).getMatrix())
