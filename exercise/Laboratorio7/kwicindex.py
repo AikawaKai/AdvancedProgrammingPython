@@ -4,6 +4,21 @@ def cleaning(string):
 def generateWhiteSpaces(lenght):
     return "".join([" " for i in range(lenght)])
 
+def formatting(line, totalLenght):
+    lineLenght= len(line)
+    if totalLenght < 79:
+        white = generateWhiteSpaces(79 - totalLenght)
+        liststring = list(white)
+        liststring[-1] = "."
+        white = "".join(liststring)
+        return line + white
+    if totalLenght == 79:
+        return line
+    else:
+        diff = totalLenght-79
+        listline = list(line)
+        return "".join(listline[:-diff])
+
 
 class IterFile(object):
 
@@ -35,13 +50,12 @@ if __name__ == '__main__':
     basiclist = []
     for liste in lista1:
         basiclist += liste
-    print(basiclist)
     stopwords = ["and", "the"]
     filterLambda = lambda x:  len(x[0])<=2 or x[0] not in stopwords
     basiclist = list(filter(filterLambda, basiclist))
     basiclist = sorted(basiclist, key=lambda x: x[0])
     basiclist = [(token, num, line, line.lower().index(token)) for token, num, line in basiclist]
-    basiclist = [(token, num, line, generateWhiteSpaces(40-6-index)) for token, num, line, index in basiclist]
-    print(basiclist)
+    basiclist = [(token, num, line, 40-6-index) for token, num, line, index in basiclist]
+    basiclist = [(token, num, line, white, 6+white+len(line)) for token, num, line, white in basiclist]
     for elem in basiclist:
-        print("{0:>5} {2}{1}".format(elem[1], elem[2], elem[3]))
+        print("{0:>5} {2}{1}".format(elem[1], formatting(elem[2], elem[4]), generateWhiteSpaces(elem[3])))
