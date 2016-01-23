@@ -51,8 +51,8 @@ class Matrix(object):
         matrixO = matrix.getMatrix()
         gC = Matrix._getColumn
         mV = Matrix._mulTwoVectors
-        return Matrix([mV(self.matrix[i], gC(matrixO, j)) for j in
-                      range(self.getNumColumn()) for i in
+        return Matrix([[mV(self.matrix[i], gC(matrixO, j)) for j in
+                      range(self.getNumColumn())] for i in
                       range(self.getNumRow())])
 
     def _getColumn(matrix, j):
@@ -81,15 +81,15 @@ if __name__ == '__main__':
     except:
         pass
     matrix4 = Matrix([[1, 3, 4, 5], [1, 3, 4, 5]])
-    print(matrix1.getMatrix())
+    #  print(matrix1.getMatrix())
     matrix3 = matrix1.cp()
     matrix = matrix3.getMatrix()
     matrix[1][0] = 3
-    print(matrix)
+    # print(matrix)
     print(matrix1.getMatrix())
     print(matrix3.getMatrix())  # reference to matrix
-    print((matrix3 + matrix1).getMatrix())
-    print(matrix1 * 3)
-    print(matrix1 * matrix3)
+    # print((matrix3 + matrix1).getMatrix())
+    # print(matrix1 * 3)
+    print((matrix1 * matrix3).getMatrix())
     #  print(Matrix.getColumn(matrix1.getMatrix(), 0))
     #  print(matrix1 * 7.5)
