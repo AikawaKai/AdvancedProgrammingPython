@@ -9,7 +9,6 @@ def formatting(line, token):
     listLine = list(line)
     whitespaces = generateWhiteSpaces(40-6-indexT)
     if indexT > 33:
-        print("capita")
         diff = indexT - 33
         listLine = listLine[diff-1:]
         line = "".join(listLine)
