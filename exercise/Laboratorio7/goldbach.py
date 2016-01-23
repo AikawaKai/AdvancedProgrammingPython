@@ -1,4 +1,5 @@
 from math import sqrt
+from itertools import combinations_with_replacement as comb
 
 
 def isPrime(n):
@@ -53,13 +54,27 @@ def goldbach(n):
         if num > n:
             break
         listOfPrimeToN.append(num)
-    print(listOfPrimeToN)
+    listToCheck = list(comb(listOfPrimeToN, 2))
+    for elem in listToCheck:
+        if elem[0] + elem[1] == n:
+            return elem
+
+
+def goldbach_list(n, m):
+    listOfEven = [num for num in range(n, m) if num % 2 == 0]
+    dictGoldBach = dict()
+    for elem in listOfEven:
+        (num1, num2) = goldbach(elem)
+        dictGoldBach[elem] = "{0} = {1} + {2}".format(elem, num1, num2)
+    return dictGoldBach
+
 
 
 if __name__ == '__main__':
     print(list(filter(isPrime, [elem for elem in range(0, 100)])))
-    goldbach(4)
-    goldbach(6)
-    goldbach(8)
-    goldbach(10)
-    goldbach(12)
+    print(goldbach(4))
+    print(goldbach(6))
+    print(goldbach(8))
+    print(goldbach(10))
+    print(goldbach(12))
+    print(goldbach_list(4, 19))
