@@ -35,7 +35,15 @@ class Matrix(object):
             return Matrix(matrix)
         raise ValueError("Matrix are not compatible for the sum operation")
 
+    def __mul__(self, other):
+        if isinstance(other, int):
+            return self._mul(other)
+        if isinstance(other, Matrix):
+            return self._mulM(other)
+        raise ValueError("Stai moltiplicando per un valore non concesso")
 
+    def _mul(self, other):
+        return [[self.matrix[i][j] * other for j in range(self.getLenColumn())] for i in range(self.getLenRow())]
 
     def __eq__(self, othermatrix):
         return True if self.matrix == othermatrix.getMatrix() else False
@@ -65,3 +73,4 @@ if __name__ == '__main__':
     print(matrix1.getMatrix())
     print(matrix3.getMatrix())  # reference to matrix
     print((matrix3 + matrix1).getMatrix())
+    print(matrix1 * 3)
