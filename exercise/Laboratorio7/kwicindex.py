@@ -1,6 +1,9 @@
 def cleaning(string):
     return " ".join(string.split())
 
+def generateWhiteSpaces(lenght):
+    return "".join([" " for i in range(lenght)])
+
 
 class IterFile(object):
 
@@ -37,6 +40,8 @@ if __name__ == '__main__':
     filterLambda = lambda x:  len(x[0])<=2 or x[0] not in stopwords
     basiclist = list(filter(filterLambda, basiclist))
     basiclist = sorted(basiclist, key=lambda x: x[0])
+    basiclist = [(token, num, line, line.lower().index(token)) for token, num, line in basiclist]
+    basiclist = [(token, num, line, generateWhiteSpaces(40-6-index)) for token, num, line, index in basiclist]
     print(basiclist)
     for elem in basiclist:
-        print("{0:>5} {1: ^50}".format(elem[1], elem[2]))
+        print("{0:>5} {2}{1}".format(elem[1], elem[2], elem[3]))
