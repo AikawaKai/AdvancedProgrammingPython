@@ -4,20 +4,26 @@ def cleaning(string):
 def generateWhiteSpaces(lenght):
     return "".join([" " for i in range(lenght)])
 
-def formatting(line, totalLenght):
-    lineLenght= len(line)
-    if totalLenght < 79:
-        white = generateWhiteSpaces(79 - totalLenght)
-        liststring = list(white)
-        liststring[-1] = "."
-        white = "".join(liststring)
-        return line + white
-    if totalLenght == 79:
-        return line
-    else:
-        diff = totalLenght-79
-        listline = list(line)
-        return "".join(listline[:-diff])
+def formatting(line, token):
+    indexT = line.index(token)
+    listLine = list(line)
+    whitespaces = generateWhiteSpaces(40-6-indexT)
+    if indexT > 33:
+        diff = indexT - 33
+        listLine = listLine[diff-1:]
+        line = "".join(listLine)
+        indexT = line.index(token)
+    diff = (len(line) - indexT) -40
+    if diff > 0:
+        listLine = list(line)
+        listLine = listLine[:-diff]
+        line = "".join(listLine)
+        indexT = line.index(token)
+        whitespaces = generateWhiteSpaces(40-6-indexT)
+    return (line, whitespaces)
+
+
+
 
 
 class IterFile(object):
@@ -45,7 +51,7 @@ if __name__ == '__main__':
     itera = IterFile("test.txt")
     lista = [(cleaning(elem[0]), elem[1]) for elem in itera]
     #  print(lista)
-    lista1 = [[(str.lower(token), num, line) for token in line.split()] for line, num in lista]
+    lista1 = [[(token, num, line) for token in line.split()] for line, num in lista]
     #  print(lista1)
     basiclist = []
     for liste in lista1:
@@ -53,9 +59,7 @@ if __name__ == '__main__':
     stopwords = ["and", "the"]
     filterLambda = lambda x:  len(x[0])<=2 or x[0] not in stopwords
     basiclist = list(filter(filterLambda, basiclist))
-    basiclist = sorted(basiclist, key=lambda x: x[0])
-    basiclist = [(token, num, line, line.lower().index(token)) for token, num, line in basiclist]
-    basiclist = [(token, num, line, 40-6-index) for token, num, line, index in basiclist]
-    basiclist = [(token, num, line, white, 6+white+len(line)) for token, num, line, white in basiclist]
+    basiclist = sorted(basiclist, key=lambda x: x[0].lower())
+    basiclist = [(token, num, line, formatting(line, token)) for token, num, line in basiclist]
     for elem in basiclist:
-        print("{0:>5} {2}{1}".format(elem[1], formatting(elem[2], elem[4]), generateWhiteSpaces(elem[3])))
+        print("{0:>5} {1}{2}".format(elem[1], elem[3][1], elem[3][0]))
