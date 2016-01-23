@@ -11,6 +11,10 @@ class Matrix(object):
         for i in range(1, len(listOfRow)):
             if len(listOfRow[i]) != rowLen:
                 raise ValueError("Matrice non conforme")
+        for row in listOfRow:
+            for value in row:
+                if not isinstance(value, int):
+                    raise ValueError("Matrice con valore non interi")
         self.matrix = listOfRow
         self.n = n
         self.m = rowLen
@@ -24,13 +28,14 @@ class Matrix(object):
     def getLenColumn(self):
         return self.m
 
-    def sumMatrix(self, other):
+    def __add__(self, other):
         if self.getLenRow() == other.getLenRow() and self.getLenColumn() == other.getLenColumn():
             otherM = other.getMatrix()
             matrix = [[self.matrix[i][j] + otherM[i][j] for j in range(self.getLenColumn())] for i in range(self.getLenRow())]
             return Matrix(matrix)
-        else:
-            return False
+        raise ValueError("Matrix are not compatible for the sum operation")
+
+
 
     def __eq__(self, othermatrix):
         return True if self.matrix == othermatrix.getMatrix() else False
@@ -51,6 +56,7 @@ if __name__ == '__main__':
         matrix2 = Matrix(listOfRow)
     except:
         pass
+    matrix4 = Matrix([[1, 3, 4, 5], [1, 3, 4, 5]])
     print(matrix1.getMatrix())
     matrix3 = matrix1.cp()
     matrix = matrix3.getMatrix()
@@ -58,4 +64,4 @@ if __name__ == '__main__':
     print(matrix)
     print(matrix1.getMatrix())
     print(matrix3.getMatrix())  # reference to matrix
-    print(matrix3.sumMatrix(matrix1).getMatrix())
+    print((matrix3 + matrix1).getMatrix())
