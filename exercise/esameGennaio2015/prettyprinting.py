@@ -16,7 +16,7 @@ def prettyCSV(file):
     print(regroup, maxSizeColumns)
     newRegroup = [["{0:<{1}}".format(regroup[j][i], maxSizeColumns[j]) for j in range(len(regroup))] for i in range(len(regroup[0]))]
     newRegroup = [[newRegroup[i][j] for j in range(len(newRegroup[0]))] for i in range(len(newRegroup))]
-    print("\n".join(["|"+"|".join(elem) for elem in newRegroup]))
+    print("\n".join(["|"+"|".join(elem)+"|" for elem in newRegroup]))
 
 
 if __name__ == '__main__':
