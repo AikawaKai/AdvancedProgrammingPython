@@ -43,7 +43,7 @@ def make_tests(ring, name):
             checks = []
             for x in ring.signature():
                 checks += [any([(x+y) == ring.z for y in ring.signature()])]
-                self.assertTrue(all(checks), msg="The ring does not respect invertibility property for the addition: ")
+            self.assertTrue(all(checks), msg="The ring does not respect invertibility property for the addition: ")
 
         def test_sum_commutativity(self):
             print("### Checking Sum Commutativity on {0}: ".format(name))
