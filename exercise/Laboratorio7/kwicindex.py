@@ -43,12 +43,15 @@ class IterFile(object):
         if line == "":
             raise StopIteration
         self.cache.append(lineCouple)
-        self.count +=1
+        self.count += 1
         return lineCouple
 
 
-if __name__ == '__main__':
-    itera = IterFile("test.txt")
+stopwords = ["and", "the"]
+
+
+def kwicindex(filename):
+    itera = IterFile(filename)
     lista = [(cleaning(elem[0]), elem[1]) for elem in itera]
     #  print(lista)
     lista1 = [[(token, num, line) for token in line.split()] for line, num in lista]
@@ -56,10 +59,13 @@ if __name__ == '__main__':
     basiclist = []
     for liste in lista1:
         basiclist += liste
-    stopwords = ["and", "the"]
     filterLambda = lambda x:  len(x[0])>2 and x[0].lower() not in stopwords
     basiclist = list(filter(filterLambda, basiclist))
     basiclist = sorted(basiclist, key=lambda x: x[0].lower())
     basiclist = [(token, num, line, formatting(line, token)) for token, num, line in basiclist]
     for elem in basiclist:
         print("{0:>5} {1}{2}".format(elem[1], elem[3][1], elem[3][0]))
+
+
+if __name__ == '__main__':
+    kwicindex("test.txt")
