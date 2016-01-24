@@ -64,6 +64,11 @@ class Matrix(object):
     def transpose(self):
         return Matrix([[self.matrix[j][i] for j in range(self.getNumRow())] for i in range(self.getNumColumn())])
 
+    def matrix1norm(self):
+        matrixAbs = [[abs(self.matrix[i][j]) for j in range(self.getNumColumn())] for i in range(self.getNumRow())]
+        columns = [Matrix._getColumn(matrixAbs, j) for j in range(self.getNumColumn())]
+        return max(sum(columns[i]) for i in range(self.getNumColumn()))
+
     def __eq__(self, othermatrix):
         return True if self.matrix == othermatrix.getMatrix() else False
 
@@ -103,5 +108,10 @@ if __name__ == '__main__':
     print(matrix5.transpose().getMatrix())
     print((matrix5 * 2).getMatrix())
     print((matrix4 * 2).getMatrix())
+    print(matrix4.matrix1norm())
+    print(matrix5.matrix1norm())
+    print(matrix1.matrix1norm())
+    matrix6 = Matrix([[6, 7, 10], [5, 8, 3], [2, 4, 7], [3, 4, 3]])
+    print(matrix6.matrix1norm())
     #  print(Matrix.getColumn(matrix1.getMatrix(), 0))
     #  print(matrix1 * 7.5)
