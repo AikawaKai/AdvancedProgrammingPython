@@ -79,6 +79,9 @@ class Matrix(object):
         matrixCp = copy.deepcopy(self.matrix)
         return Matrix(matrixCp)
 
+    def __repr__(self):
+        return "Matrix({0})".format(repr(self.matrix))
+
 
 if __name__ == '__main__':
     try:
@@ -113,5 +116,6 @@ if __name__ == '__main__':
     print(matrix1.matrix1norm())
     matrix6 = Matrix([[6, 7, 10], [5, 8, 3], [2, 4, 7], [3, 4, 3]])
     print(matrix6.matrix1norm())
+    print(repr(matrix6))
     #  print(Matrix.getColumn(matrix1.getMatrix(), 0))
     #  print(matrix1 * 7.5)
