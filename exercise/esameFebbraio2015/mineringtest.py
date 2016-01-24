@@ -104,10 +104,12 @@ class nZ(object):
 
 def Zn():
     count = 0
+    yield Z(count)
     while True:
+        count += 1
         yield Z(count)
         yield Z(-count)
-        count += 1
+        
 
 ringz = createRing(Z, Z(1), Z(0), lambda x, y: Z(x.value+y.value), lambda x, y: Z(x.value*y.value))
 testz = GenerateTest("ringz", ringz)
