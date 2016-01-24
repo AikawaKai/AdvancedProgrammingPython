@@ -52,7 +52,7 @@ class Matrix(object):
         gC = Matrix._getColumn
         mV = Matrix._mulTwoVectors
         return Matrix([[mV(self.matrix[i], gC(matrixO, j)) for j in
-                      range(self.getNumColumn())] for i in
+                      range(matrix.getNumColumn())] for i in
                       range(self.getNumRow())])
 
     def _getColumn(matrix, j):
@@ -81,6 +81,7 @@ if __name__ == '__main__':
     except:
         pass
     matrix4 = Matrix([[1, 3, 4, 5], [1, 3, 4, 5]])
+    matrix5 = Matrix([[1, 2], [3, 4], [5, 6], [7, 8]])
     #  print(matrix1.getMatrix())
     matrix3 = matrix1.cp()
     matrix = matrix3.getMatrix()
@@ -90,6 +91,9 @@ if __name__ == '__main__':
     print(matrix3.getMatrix())  # reference to matrix
     # print((matrix3 + matrix1).getMatrix())
     # print(matrix1 * 3)
-    print((matrix1 * matrix3).getMatrix())
+    print((matrix1 * matrix3).getMatrix())  # ok
+    print((matrix4 * matrix5).getMatrix())  # ok
+    print((matrix5 * matrix4).getMatrix())  # ok
+    print(matrix1 * matrix5)
     #  print(Matrix.getColumn(matrix1.getMatrix(), 0))
     #  print(matrix1 * 7.5)
