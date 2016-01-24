@@ -47,6 +47,7 @@ def op2(a, b):
 
 z = Z(100)
 
+
 class TestinRing(TestCase):
 
     def testingZset(self):
@@ -60,8 +61,7 @@ class TestinRing(TestCase):
     def testInitClass(self):
         z = Z(100)
         set1 = set([elem for elem in z])
-        set2 = set([elem for elem in z])
-        ring = Ring(set1, op1, op2)
+        Ring(set1, op1, op2, i=1, z=0)
 
 
 if __name__ == '__main__':
