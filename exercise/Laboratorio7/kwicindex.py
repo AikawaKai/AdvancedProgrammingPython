@@ -48,18 +48,16 @@ class IterFile(object):
 
 
 stopwords = ["and", "the"]
+filterLambda = lambda x:  len(x[0])>2 and x[0].lower() not in stopwords
 
 
 def kwicindex(filename):
     itera = IterFile(filename)
     lista = [(cleaning(elem[0]), elem[1]) for elem in itera]
-    #  print(lista)
     lista1 = [[(token, num, line) for token in line.split()] for line, num in lista]
-    #  print(lista1)
     basiclist = []
     for liste in lista1:
         basiclist += liste
-    filterLambda = lambda x:  len(x[0])>2 and x[0].lower() not in stopwords
     basiclist = list(filter(filterLambda, basiclist))
     basiclist = sorted(basiclist, key=lambda x: x[0].lower())
     basiclist = [(token, num, line, formatting(line, token)) for token, num, line in basiclist]
