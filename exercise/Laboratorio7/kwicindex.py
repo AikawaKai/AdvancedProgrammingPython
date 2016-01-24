@@ -16,7 +16,7 @@ def formatting(line, token):
         line = "".join(listLine)
         indexT = line.index(token)
         whitespaces = ""
-    diff = (len(line) - indexT) -40
+    diff = (len(line) - indexT) - 40
     if diff > 0:
         listLine = list(line)
         listLine = listLine[:-diff]
@@ -48,7 +48,7 @@ class IterFile(object):
 
 
 stopwords = ["and", "the"]
-filterLambda = lambda x:  len(x[0])>2 and x[0].lower() not in stopwords
+filterLambda = lambda x:  len(x[0]) > 2 and x[0].lower() not in stopwords
 
 
 def kwicindex(filename):
