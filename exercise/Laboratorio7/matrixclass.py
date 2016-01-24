@@ -43,7 +43,7 @@ class Matrix(object):
         raise ValueError("Stai moltiplicando per un valore non concesso")
 
     def _mul(self, other):
-        return [[self.matrix[i][j] * other for j in range(self.getNumColumn())] for i in range(self.getNumRow())]
+        return [[self.matrix[i][j] * other for i in range(self.getNumRow())] for j in range(self.getNumColumn())]
 
     def _mulM(self, matrix):
         if not self.getNumColumn() == matrix.getNumRow():
@@ -60,6 +60,9 @@ class Matrix(object):
 
     def _mulTwoVectors(vect1, vect2):
         return sum([vect1[i]*vect2[i] for i in range(len(vect1))])
+
+    def transpose(self):
+        self.matrix = [[self.matrix[j][i] for j in range(self.getNumRow())] for i in range(self.getNumColumn())]
 
     def __eq__(self, othermatrix):
         return True if self.matrix == othermatrix.getMatrix() else False
@@ -94,6 +97,10 @@ if __name__ == '__main__':
     print((matrix1 * matrix3).getMatrix())  # ok
     print((matrix4 * matrix5).getMatrix())  # ok
     print((matrix5 * matrix4).getMatrix())  # ok
-    print(matrix1 * matrix5)
+    #  print(matrix1 * matrix5) # ok
+    matrix1.transpose()
+    print(matrix1.getMatrix())
+    matrix4.transpose()
+    print(matrix4.getMatrix())
     #  print(Matrix.getColumn(matrix1.getMatrix(), 0))
     #  print(matrix1 * 7.5)
