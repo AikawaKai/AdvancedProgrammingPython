@@ -102,5 +102,7 @@ if __name__ == '__main__':
     print(matrix1.getMatrix())
     matrix4.transpose()
     print(matrix4.getMatrix())
+    matrix5.transpose()
+    print(matrix5.getMatrix())
     #  print(Matrix.getColumn(matrix1.getMatrix(), 0))
     #  print(matrix1 * 7.5)
