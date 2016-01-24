@@ -93,7 +93,7 @@ class nZ(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return "Z({0})".format(self.value)
+        return "nZ({0})".format(self.value)
 
     def generateSet(n=50):
         return [nZ(x) for x in range(-n, n+1)]
