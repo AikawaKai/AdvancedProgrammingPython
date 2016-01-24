@@ -43,7 +43,7 @@ class Matrix(object):
         raise ValueError("Stai moltiplicando per un valore non concesso")
 
     def _mul(self, other):
-        return [[self.matrix[i][j] * other for i in range(self.getNumRow())] for j in range(self.getNumColumn())]
+        return Matrix([[self.matrix[i][j] * other for j in range(self.getNumColumn())] for i in range(self.getNumRow())])
 
     def _mulM(self, matrix):
         if not self.getNumColumn() == matrix.getNumRow():
@@ -62,7 +62,7 @@ class Matrix(object):
         return sum([vect1[i]*vect2[i] for i in range(len(vect1))])
 
     def transpose(self):
-        self.matrix = [[self.matrix[j][i] for j in range(self.getNumRow())] for i in range(self.getNumColumn())]
+        return Matrix([[self.matrix[j][i] for j in range(self.getNumRow())] for i in range(self.getNumColumn())])
 
     def __eq__(self, othermatrix):
         return True if self.matrix == othermatrix.getMatrix() else False
@@ -98,11 +98,10 @@ if __name__ == '__main__':
     print((matrix4 * matrix5).getMatrix())  # ok
     print((matrix5 * matrix4).getMatrix())  # ok
     #  print(matrix1 * matrix5) # ok
-    matrix1.transpose()
-    print(matrix1.getMatrix())
-    matrix4.transpose()
-    print(matrix4.getMatrix())
-    matrix5.transpose()
-    print(matrix5.getMatrix())
+    print(matrix1.transpose().getMatrix())
+    print(matrix4.transpose().getMatrix())
+    print(matrix5.transpose().getMatrix())
+    print((matrix5 * 2).getMatrix())
+    print((matrix4 * 2).getMatrix())
     #  print(Matrix.getColumn(matrix1.getMatrix(), 0))
     #  print(matrix1 * 7.5)
