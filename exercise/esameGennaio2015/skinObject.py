@@ -1,10 +1,11 @@
-
-def become(self, set1, set2):
-    for fun in set1:
-        self.__dict__[fun.__name__] = fun
-    for fun in set2:
-        if fun.__name__ in self.__dict__:
-            del self.__dict__[fun.__name__]
+def decor(classname):
+    def become(self, set1, set2):
+        for fun in set1:
+            self.__dict__[fun.__name__] = fun.__get__(self, classname)
+        for fun in set2:
+            if fun.__name__ in self.__dict__:
+                del self.__dict__[fun.__name__]
+    return become
 
 
 def pop(self):
@@ -22,7 +23,7 @@ def push(self, elem):
 class Skin(type):
 
     def __new__(meta, classname, supers, classdict):
-        classdict["become"] = become
+        classdict["become"] = decor(classname)
         return type.__new__(meta, classname, supers, classdict)
 
 

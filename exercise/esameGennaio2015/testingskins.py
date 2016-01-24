@@ -10,5 +10,5 @@ if __name__ == "__main__":
         elif s.is_full():
             s.become({pop}, {push})
             trend = False
-        push(s, i) if trend else pop(s)
+        s.push(i) if trend else s.pop()
         print(s)
