@@ -1,7 +1,6 @@
 from unittest import TestCase
 from unittest import TestSuite
 from itertools import product
-from unittest import loader
 from unittest import TestLoader
 from unittest import TextTestRunner
 
@@ -99,11 +98,7 @@ def GenerateTest(Ring, ringname):
             for x, y, z in self.triples:
                 self.assertEqual((y+z)*x, (y*x)+(z*x))
 
-
-
-
     return TestRing
-
 
 ringz = addDataToClass(Z, Z(1), Z(0), (lambda x, y: Z(x.value + y.value)), (lambda x, y: Z(x.value * y.value)))
 testz = GenerateTest(ringz, "Z ring")
