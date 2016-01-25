@@ -15,7 +15,7 @@ def createRing(ClassRing, i, z, add, mul):
 
 def GenerateTest(nameRing, Class):
     class check_ring(TestCase):
-        setToTest = Class.generateSet(50)
+        setToTest = Class.generateSet()
         print(setToTest)
         closureset = product(setToTest, repeat=2)
         associativityset = product(setToTest, repeat=3)
@@ -102,6 +102,48 @@ class nZ(object):
         return (self in Zn())
 
 
+class Z4(object):
+
+    def __init__(self, value):
+        self.value = value
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __repr__(self):
+        return "Z4({0})".format(self.value)
+
+    def generateSet():
+        return [Z4(x) for x in range(0, 4)]
+
+    def inSet(self):
+        return (self in Z4.generateSet())
+
+
+class Bool(object):
+
+    def __init__(self, value):
+        self.value = value
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __repr__(self):
+        return "Bool({0})".format(self.value)
+
+    def generateSet():
+        return [Bool(True), Bool(False)]
+
+    def inSet(self):
+        return (self in Bool.generateSet())
+
+
 def Zn():
     count = 0
     yield Z(count)
@@ -109,7 +151,7 @@ def Zn():
         count += 1
         yield Z(count)
         yield Z(-count)
-        
+
 
 ringz = createRing(Z, Z(1), Z(0), lambda x, y: Z(x.value+y.value), lambda x, y: Z(x.value*y.value))
 testz = GenerateTest("ringz", ringz)
@@ -117,8 +159,16 @@ testz = GenerateTest("ringz", ringz)
 ringnz = createRing(nZ, nZ(0), nZ(1), lambda x, y: nZ(x.value*y.value), lambda x, y: nZ(x.value+y.value))
 testnz = GenerateTest("ringnz", ringnz)
 
+ringz4 = createRing(Z4, Z4(1), Z4(0), lambda x, y: Z4((x.value + y.value) % 4), lambda x, y: Z4((x.value * y.value) % 4))
+testz4 = GenerateTest("ringZ4", ringz4)
+
+ringBool = createRing(Bool, Bool(True), Bool(False), lambda x, y: Bool(x.value or y.value), lambda x, y: Bool(x.value and y.value))
+testBool = GenerateTest("ringBool", ringBool)
+
+tests = [testz4, testz, testnz, testBool]
+
 if __name__ == '__main__':
     suite = TestSuite()
-    suite.addTests(TestLoader().loadTestsFromTestCase(testz))
-    suite.addTests(TestLoader().loadTestsFromTestCase(testnz))
+    for test in tests:
+        suite.addTests(TestLoader().loadTestsFromTestCase(test))
     TextTestRunner(verbosity=2).run(suite)
