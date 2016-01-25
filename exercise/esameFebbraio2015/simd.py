@@ -25,12 +25,16 @@ def split_and_merge(numthread, composeF):
                 last = setThreadList[-1]
                 update = last + lista
                 setThreadList[-1] = update
-            results = []
+            threads = []
             for tlist in setThreadList:
                 res = []
                 print("runner", tlist)
-                threading.Thread(target=funWithResult, args=(res, tlist)).start()
-                results.append(res[0])
+                threadTemp = threading.Thread(target=funWithResult, args=(res, tlist))
+                threadTemp.start()
+                threads.append((threadTemp, res))
+            for th in threads:
+                th[0].join()
+            results = [th[1][0] for th in threads]
             return composeF(results)
         return wrapper
     return decorator
