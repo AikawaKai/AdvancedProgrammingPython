@@ -19,9 +19,14 @@ def split_and_merge(numthread, composeF):
                 plista = lista[:partition]
                 lista = lista[partition:]
                 setThreadList.append(plista)
+            if len(lista) > 0:
+                last = setThreadList[-1]
+                update = last + lista
+                setThreadList[-1] = update
             results = []
             for tlist in setThreadList:
                 res = []
+                print("runner", tlist)
                 threading.Thread(target=funWithResult, args=(res, tlist)).start()
                 results.append(res[0])
             return composeF(results)
