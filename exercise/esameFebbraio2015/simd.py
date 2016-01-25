@@ -15,10 +15,12 @@ def split_and_merge(numthread, composeF):
             lista = args[0]
             partition = len(lista)//numthread
             setThreadList = []
-            while partition < len(lista):
+            numT = 0
+            while numT < numthread:
                 plista = lista[:partition]
                 lista = lista[partition:]
                 setThreadList.append(plista)
+                numT += 1
             if len(lista) > 0:
                 last = setThreadList[-1]
                 update = last + lista
