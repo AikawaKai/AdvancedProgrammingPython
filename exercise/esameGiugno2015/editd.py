@@ -1,6 +1,3 @@
-import copy
-
-
 def diff1(string1, string2):
     return True if sum([0 if list(string1)[i] == list(string2)[i] else 1 for i in range(len(string1))]) == 1 else False
 
