@@ -23,7 +23,7 @@ def fibo(n):
 
 @memoization
 def sum(a, b):
-    return a+b
+    return a if b == 0 else sum(a+1, b-1)
 
 if __name__ == "__main__":
     print("sum({0},{1})  => {2}".format(9, 5, sum(9, 5)))
