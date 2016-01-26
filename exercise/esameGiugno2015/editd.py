@@ -22,10 +22,9 @@ def chainr(string1, string2, listOfWords, lista, listOfList):
         listOfList.append(lista)
     listOfNext = [elem for elem in listOfWords if diff1(elem, string1)]
     for nextElem in listOfNext:
-        newlist = copy.deepcopy(lista)
+        newlist = [elem for elem in lista]
         newlist.append(string1)
-        lWCp = copy.deepcopy(listOfWords)
-        lWCp.remove(string1)
+        lWCp = [elem for elem in listOfWords if elem != string1]
         chainr(nextElem, string2, lWCp, newlist, listOfList)
     return listOfList
 
