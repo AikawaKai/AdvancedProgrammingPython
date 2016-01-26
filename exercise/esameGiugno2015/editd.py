@@ -16,8 +16,6 @@ def chain(string1, string2):
     return string
 
 
-
-
 def chainr(string1, string2, listOfWords, lista, listOfList):
     if string1 == string2:
         lista.append(string1)
