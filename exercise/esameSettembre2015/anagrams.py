@@ -19,7 +19,7 @@ def anagrams():
     base = ""
     for key, value in new_dict:
         base += "{0:<15}:- {1}\n".format(key, value)
-    print(base)
+    return base
 
 if __name__ == '__main__':
     print(anagrams())
