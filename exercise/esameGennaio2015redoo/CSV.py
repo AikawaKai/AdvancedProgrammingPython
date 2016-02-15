@@ -10,7 +10,7 @@ def maxLenArrayStrings(strings):
 
 def formatStringCsv(table, formattedString):
     if len(table) == 0:
-        return formattedString
+        return formattedString + "\n"
     else:
         arraystring = [" {0:{1}} ".format(line[0], line[1]) for
                        line in table[0]]
@@ -31,7 +31,7 @@ def prettyCSV(filecsv):
     totallen = sum([line[1] for line in table[0]]) + (lenColumns * 3) + 1
     separatorstring = "".join(["-" for i in range(totallen)])
     title = separatorstring+"\n|"+"|".join([" {0:{1}} ".format(line[0], line[1]) for line in table[0]])+"|"+"\n"+separatorstring
-    string = title + formatStringCsv(table[1:], "") + "\n" + separatorstring
+    string = title + formatStringCsv(table[1:], "") + separatorstring
     return string
 
 if __name__ == '__main__':
