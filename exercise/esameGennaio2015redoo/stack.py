@@ -1,4 +1,4 @@
-from skins import *
+from skinredo import *
 
 
 def push(self, data1):
@@ -11,7 +11,7 @@ def pop(self):
     self.top -= 1
 
 
-class stack(metaclass=changeSkin):
+class stack(metaclass=ChangeSkin):
     def __init__(self, dim=10):
         self.dimension = dim
         self.top = 0
