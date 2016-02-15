@@ -1,3 +1,15 @@
+import time
+
+
+def timer(fun):
+    def wrapper(*args):
+        startTime = time.time()
+        result = fun(*args)
+        endTime = time.time()
+        print("Function executed in {0} seconds".format(endTime-startTime))
+        return result
+    return wrapper
+
 
 def stripArrayStrings(strings):
     return list(map(lambda x: x.strip(), strings))
@@ -21,6 +33,7 @@ def concatStringCsv(table, formattedString):
         return concatStringCsv(table[1:], formattedString+"\n"+tempstring)
 
 
+@timer
 def prettyCSV(filecsv):
     file_open = open(filecsv, 'r')
     table = [stripArrayStrings(line.split(";")) for line in file_open]
