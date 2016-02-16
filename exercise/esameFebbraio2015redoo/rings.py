@@ -15,97 +15,143 @@ def genRing(Ring, add, mul, i, z):
 
 def Zgenerator():
     i = 0
-    yield i
+    yield Z(i)
     while True:
         i += 1
-        yield i
-        yield -i
+        yield Z(i)
+        yield Z(-i)
+
+
+def Zngenerator():
+    i = 0
+    yield Zn(i)
+    while True:
+        i += 1
+        yield Zn(i)
+        yield Zn(-i)
 
 
 class Z():
+    def __init__(self, value):
+        self.value = value
 
-    def generateSET(self, n=100):
+    def __eq__(self, other):
+        return self.value == other.value
+
+    def generateSET(n=100):
         iterator = Zgenerator()
-        self.set = [next(iterator) for i in range(n+1)]
-        return self.set
+        return [next(iterator) for i in range(n+1)]
 
-    def inSet(self, value):
-        return True if value in Zgenerator() else False
+    def inSet(self):
+        return (self in Zgenerator())
+
+
+class Zn():
+
+    def __init__(self, value):
+        self.value = value
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+    def generateSET(n=100):
+        iterator = Zngenerator()
+        return [next(iterator) for i in range(n+1)]
+
+    def inSet(self):
+        return (self in Zngenerator())
+
+
+class Z4():
+
+    def __init__(self, value):
+        self.value = value
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+    def generateSET():
+        return [Z4(x) for x in range(0, 4)]
+
+    def inSet(self):
+        return (self in Z4.generateSET())
 
 
 def generateTestCase(Ring, ringname):
 
     class TestRing(TestCase):
 
-        def setUp(self):
-            self.ring = Ring()
-            self.ringset = self.ring.generateSET()
-            self.ringname = ringname
-            self.permut2 = permutations(self.ringset, 2)
-            self.permut3 = permutations(self.ringset, 3)
-            self.z = self.ring.z
-            self.i = self.ring.i
-
         def testingClosure(self):
-            print("Test Closure: {0}".format(self.ringname))
-            for x, y in self.permut2:
-                self.assertTrue(self.ring.inSet(x+y))
-                self.assertTrue(self.ring.inSet(x*y))
+            print("Test Closure: {0}".format(ringname))
+            permut2 = permutations(Ring.generateSET(), 2)
+            for x, y in permut2:
+                self.assertTrue(Ring.inSet(x+y))
+                self.assertTrue(Ring.inSet(x*y))
 
         def testAssociativityAdd(self):
-            print("Test AssociativityAdd: {0}".format(self.ringname))
-            for x, y, z in self.permut3:
+            print("Test AssociativityAdd: {0}".format(ringname))
+            permut3 = permutations(Ring.generateSET(), 3)
+            for x, y, z in permut3:
                     self.assertEqual((x+y)+z, x+(y+z))
 
         def testAssociativityMul(self):
-            print("Test AssociativityMul: {0}".format(self.ringname))
-            for x, y, z in self.permut3:
+            print("Test AssociativityMul: {0}".format(ringname))
+            permut3 = permutations(Ring.generateSET(), 3)
+            for x, y, z in permut3:
                     self.assertEqual((x*y)*z, x*(y*z))
 
         def testIdentitySum(self):
-            print("Test Identity Sum: {0}".format(self.ringname))
-            for x in self.ringset:
-                self.assertEqual(x+self.z, x)
+            print("Test Identity Sum: {0}".format(ringname))
+            for x in Ring.generateSET():
+                self.assertEqual(x+Ring.z, x)
 
         def testIdentityMul(self):
-            print("Test Identity Mul: {0}".format(self.ringname))
-            for x in self.ringset:
-                self.assertEqual(x*self.i, x)
+            print("Test Identity Mul: {0}".format(ringname))
+            for x in Ring.generateSET():
+                self.assertEqual(x*Ring.i, x)
 
         def testInvertibility(self):
-            print("Test Invertibility Sum: {0}".format(self.ringname))
+            print("Test Invertibility Sum: {0}".format(ringname))
             result = []
-            for x in self.ringset:
+            for x in Ring.generateSET():
                 setx = []
-                for y in self.ringset:
-                    setx.append(x+y == self.z)
+                for y in Ring.generateSET():
+                    setx.append(x+y == Ring.z)
                 result.append(setx)
             for setx in result:
                 self.assertTrue(sum(setx) > 0)
 
         def testCommutativityAdd(self):
-            print("Test Commutativity Sum: {0}".format(self.ringname))
-            for x, y in self.permut2:
+            print("Test Commutativity Sum: {0}".format(ringname))
+            permut2 = permutations(Ring.generateSET(), 2)
+            for x, y in permut2:
                 self.assertTrue((x+y) == (y+x))
 
-        def testDistributivityMul(self):
-            print("Test Distributivity Mul over Sum: {0}".format(self.ringname))
-            for x, y, z in self.permut3:
+        def testDistributivityMuloverSum(self):
+            print("Test Distributivity Mul over Sum: {0}".format(ringname))
+            permut3 = permutations(Ring.generateSET(), 3)
+            for x, y, z in permut3:
                 self.assertEqual(x * (y + z), (x * y) + (x * z))
-            for x, y, z in self.permut3:
+            for x, y, z in permut3:
                 self.assertEqual((y + z) * x, (y * x) + (z * x))
-
-
 
     return TestRing
 
 
-ringZ = genRing(Z, lambda x, y: x+y, lambda x, y: x*y, 1, 0)
+ringZ = genRing(Z, lambda x, y: Z(x.value+y.value), lambda x, y: Z(x.value*y.value), Z(1), Z(0))
 testZ = generateTestCase(ringZ, "ring Z + x i=1 z=0")
+
+ringZn = genRing(Zn, lambda x, y: Zn(x.value*y.value), lambda x, y: Zn(x.value+y.value), Zn(0), Zn(1))
+testZn = generateTestCase(ringZn, "ring Zn x + i=0 z=1")
+
+ringZ4 = genRing(Z4, lambda x, y: Z4((x.value+y.value) % 4), lambda x, y: Z4((x.value*y.value) % 4), Z4(1), Z4(0))
+testZ4 = generateTestCase(ringZ4, "ring Z4 + x i=0 z=1")
+tests = [testZ, testZn, testZ4]
 
 if __name__ == '__main__':
     suite = TestSuite()
     testLoader = TestLoader()
-    suite.addTest(testLoader.loadTestsFromTestCase(testZ))
-    runner = TextTestRunner()
+    for test in tests:
+        suite.addTest(testLoader.loadTestsFromTestCase(test))
+    runner = TextTestRunner(verbosity=2)
     runner.run(suite)
