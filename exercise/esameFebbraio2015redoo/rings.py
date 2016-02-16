@@ -77,6 +77,22 @@ class Z4():
         return (self in Z4.generateSET())
 
 
+class Bool():
+
+    def __init__(self, value):
+        self.value = value
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+    def generateSET():
+        return [Bool(False), Bool(True)]
+
+    def inSet(self):
+        return (self in Bool.generateSET())
+
+
+
 def generateTestCase(Ring, ringname):
 
     class TestRing(TestCase):
@@ -145,8 +161,11 @@ ringZn = genRing(Zn, lambda x, y: Zn(x.value*y.value), lambda x, y: Zn(x.value+y
 testZn = generateTestCase(ringZn, "ring Zn x + i=0 z=1")
 
 ringZ4 = genRing(Z4, lambda x, y: Z4((x.value+y.value) % 4), lambda x, y: Z4((x.value*y.value) % 4), Z4(1), Z4(0))
-testZ4 = generateTestCase(ringZ4, "ring Z4 + x i=0 z=1")
-tests = [testZ, testZn, testZ4]
+testZ4 = generateTestCase(ringZ4, "ring Z4 + x i=1 z=0")
+
+ringBool = genRing(Bool, lambda x, y: Bool(x.value or y.value), lambda x, y: Bool(x.value and y.value), Bool(True), Bool(False))
+testBool = generateTestCase(ringBool, "ring Bool or and i=True z=False")
+tests = [testZ, testZn, testZ4, testBool]
 
 if __name__ == '__main__':
     suite = TestSuite()
