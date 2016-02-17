@@ -92,7 +92,6 @@ class Bool():
         return (self in Bool.generateSET())
 
 
-
 def generateTestCase(Ring, ringname):
 
     class TestRing(TestCase):
