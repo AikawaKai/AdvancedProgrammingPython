@@ -1,2 +1,2 @@
-from PAtheory import eggs
+import eggs
 print(eggs.X)
