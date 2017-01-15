@@ -1,0 +1,2 @@
+X = "ciao"
+print(X)
