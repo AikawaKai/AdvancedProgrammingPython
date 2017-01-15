@@ -30,7 +30,7 @@ class Rectangle(Shape):
 class Square(Rectangle):
 
     def __init__(self, lato1):
-        super(Rectangle, self).__init__(lato1, lato1)
+        super(Square, self).__init__(lato1, lato1)
 
 class Circle(Shape):
 
