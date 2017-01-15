@@ -17,6 +17,20 @@ listOfValueToTestCircle= [(Circle.__name__, Circle(i).area(), Circle(i).perimete
 
 
 tot_list = listOfValueToTestCircle + listOfValueToTestSquare + listOfValueToTestRectangle
+
+lambda_func_area = {"Square": (lambda x: x*x), "Circle": (lambda x: x**2*pi), "Rectangle": (lambda x,y: x*y)}
 def TestingClasses(list_):
     class TestShape(unittest.TestCase):
-        pass
+
+        def testAreaIsCorrect(self):
+            for class_name, area, perim, args in list_:
+                print(class_name, area, perim, args)
+                self.assertEqual(area, lambda_func_area[class_name](*args))
+
+    return TestShape
+
+if __name__ == '__main__':
+    class_ = TestingClasses(tot_list)
+    suite = unittest.TestSuite()
+    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(class_))
+    unittest.TextTestRunner(verbosity=2).run(suite)
