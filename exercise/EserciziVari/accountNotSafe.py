@@ -14,3 +14,10 @@ class Account(object):
 
 if __name__ == '__main__':
     myA = Account(1000)
+    print(myA.get_Amount())
+    myA.withdraw(300)
+    print(myA.get_Amount())
+    myA.deposit(400)
+    print(myA.get_Amount())
+    myA.withdraw(1500)
+    print(myA.get_Amount())
