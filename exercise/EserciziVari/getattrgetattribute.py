@@ -13,6 +13,8 @@ class A:
 
 if __name__ == '__main__':
     a = A("ciao")
-    print(a.my_attr)
-    print(a.x_attr)
-    print(a.y_attr)
+    print(a.my_attr) #attributo definito
+    x.z_attr = 0 # attributo definito!!!!
+    print(a.z_attr) # la get non passa da __getattr__ ,perché z_attr è definito!!!
+    print(a.x_attr) # attributo non definito, che chiamo e basta
+    print(a.y_attr)# attributo non definito, che chiamo e basta
