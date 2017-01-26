@@ -111,4 +111,5 @@ if __name__ == '__main__':
     print(callFact(200))
     print(callFactIter(200))
     anotherF("stringa da stampare")
-    ClassToExtend(10, 12)
+    c = ClassToExtend(10, 12)
+    print(c.sum())
