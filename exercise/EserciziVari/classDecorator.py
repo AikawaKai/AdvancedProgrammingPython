@@ -5,6 +5,7 @@ def classDecorator(cls):
             self.wrapped = cls(*args)
 
         def __getattr__(self, name):
+            print(name)
             return getattr(self.wrapped, name)
 
         def __setattr__(self, name, value):
