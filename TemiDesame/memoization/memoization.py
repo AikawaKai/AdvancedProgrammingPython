@@ -1,6 +1,22 @@
+def memoization(fun):
+    fun.dict = {}
+    def wrapper(*args):
+        if args in fun.dict:
+            print("### cached value for {0} --> {1}".format(args, fun.dict[args]))
+            return fun.dict[args]
+        fun.dict[args] = fun(*args)
+        return fun.dict[args]
+    return wrapper
+
+@memoization
+def sum(n1, n2):
+    return n1 if n2==0 else sum(n1+1, n2-1)
+
+@memoization
 def fact(n):
     return 1 if n<=1 else n * fact(n-1)
 
+@memoization
 def fibo(n):
     if n<=1:
         return n
