@@ -6,11 +6,9 @@ def strip_line(list_):
 
 def returnString(lines, header):
     header_width = sum(header) + ((len(header)-1)*3)+4
-    line_header = '{:-^{}}'.format('',header_width)
     list_string = [["{:<{}}".format((lines[j][i]), header[i]) for i in range(len(header))] for j in range(len(lines))]
     list_string = ["| "+" | ".join(line)+" |" for line in list_string]
-    list_string = [line_header] + [list_string[1]]+[line_header]+list_string[1:]+[line_header]
-    return "\n".join(list_string)
+    return "\n".join(['{:-^{}}'.format('',header_width)] + [list_string[1]]+['{:-^{}}'.format('',header_width)]+list_string[1:]+['{:-^{}}'.format('',header_width)])
 
 def prettyCSV(file):
     file_o = open(file, 'r')
