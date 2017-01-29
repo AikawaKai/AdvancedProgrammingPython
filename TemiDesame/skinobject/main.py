@@ -11,7 +11,6 @@ class stack(metaclass=skin):
     def __str__(self):
         return "Stack top :- {0} Stack dim :- {1} Stack data :- {2}".format(self.top, self.dimension, self.data)
 
-
 if __name__ == "__main__":
     s = stack(5) # 5 is the stack dimension
     trend = True
