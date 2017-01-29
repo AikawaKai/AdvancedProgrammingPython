@@ -11,9 +11,7 @@ def returnString(lines, header):
     return "\n".join(['{:-^{}}'.format('',header_width)] + [list_string[1]]+['{:-^{}}'.format('',header_width)]+list_string[1:]+['{:-^{}}'.format('',header_width)])
 
 def prettyCSV(file):
-    file_o = open(file, 'r')
-    lines = [strip_line(line.split(";")) for line in file_o]
-    file_o.close()
+    lines = [strip_line(line.split(";")) for line in open(file_)]
     string = ""
     if len(lines)>0:
         header_len =[max_len(lines, i) for i in range(len(lines[0]))]
