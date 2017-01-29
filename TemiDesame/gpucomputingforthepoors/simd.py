@@ -4,6 +4,7 @@ def resFun(fun):
     def int_wrapper(*args):
         args1 = args[0]
         res = args[1]
+        print("runner ", args1[0])
         res.append(fun(*args1))
     return int_wrapper
 
