@@ -49,7 +49,12 @@ def lucaslehmer(num):
 
 
 def littlefermat(num):
-    pass
+    # a^p -1 congruo 1 mod p
+    # 0<a<p
+    for a in range(2,10):
+        if pow(a,num-1,num) != 1:
+            return False
+    return True
 
 def is_prime(num):
     if num <= 10000:
