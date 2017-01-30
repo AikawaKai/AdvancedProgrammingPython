@@ -32,7 +32,7 @@ def lucaslehmer(num):
         if res == 1:
             return False
         value = value/2
-    p+=1
+        p+=1
     if not trialdivision(p):
         return False
     gen = getp_2el(p)
