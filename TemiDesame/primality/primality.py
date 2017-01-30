@@ -1,5 +1,6 @@
 '''trialdivision, lucaslehmer, littlefermat and is_prime '''
 from math import sqrt
+from math import log
 
 def getp_2el(p):
     cache = [4]
@@ -25,14 +26,7 @@ def lucaslehmer(num):
     '''Mp = 2^p - 1'''
     value = num + 1
     p = 0
-    while True:
-        if value == 1:
-            break
-        res = value%2
-        if res == 1:
-            return False
-        value = value/2
-        p+=1
+    p = int(log(value,2))
     if not trialdivision(p):
         return False
     gen = getp_2el(p)
