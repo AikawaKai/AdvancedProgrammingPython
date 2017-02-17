@@ -1,4 +1,4 @@
-from sudoku import *
+from mysudoku import *
 
 if __name__ == "__main__":
   S = sudoku()
