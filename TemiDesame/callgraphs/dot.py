@@ -1,4 +1,5 @@
 import ABC
+import main
 from types import *
 import sys
 import inspect
