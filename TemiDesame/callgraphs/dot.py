@@ -9,6 +9,7 @@ file_o = open("./cg.dot", 'w')
 file_o.write("strict digraph cg {\n")
 
 file_o.close()
+print(main)
 
 def decor(fun):
     def wrapper(*args, **kargs):
