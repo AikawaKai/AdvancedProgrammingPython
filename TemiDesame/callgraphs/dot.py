@@ -49,13 +49,10 @@ class MetaPath(type):
     def __new__(self, classname, supers, dict_, **kwds):
         for key, value in dict_.items():
             if type(value) is FunctionType:
-                value.classname = "classname"
                 dict_[key]=decor(value)
         return type.__new__(self, classname, supers, dict_, **kwds)
 
-ABC.C = MetaPath("C", (), dict(ABC.C.__dict__))
-ABC.B = MetaPath("B", (), dict(ABC.B.__dict__))
-ABC.A = MetaPath("A", (), dict(ABC.A.__dict__))
-A = ABC.A
-B = ABC.B
-C = ABC.C
+
+C = ABC.C = MetaPath("C", (), dict(ABC.C.__dict__))
+B = ABC.B =  MetaPath("B", (), dict(ABC.B.__dict__))
+A = ABC.A =  MetaPath("A", (), dict(ABC.A.__dict__))
