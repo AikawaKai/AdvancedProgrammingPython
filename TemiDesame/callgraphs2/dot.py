@@ -17,7 +17,8 @@ def decor(fun):
         curr = string_
         my_stack.append(string_)
         res = fun(*args, **kargs)
-        if fun.__name__ == 'cc':
+        codobj = fun.__code__
+        if len(codobj.co_names)==0:
             print(my_stack)
         next_ = ""
         while next_ != curr:

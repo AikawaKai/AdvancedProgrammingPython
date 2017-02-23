@@ -15,4 +15,6 @@ class C:
   def c(i):
     if i <=2: B.b(i-1)
     else: C.cc(i*2)
-  def cc(i): pass
+  def cc(i):
+      a = 5
+      h = 6
