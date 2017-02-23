@@ -1,23 +1,23 @@
 from types import FunctionType, MethodType
-import sys
-
-file_o = open("./cg.dot", "w")
-file_o.write("start\n")
-file_o.close()
-import inspect
 
 path_seen = dict()
 my_stack = ["main"]
 
-def decor(fun):
+file_o = open("./cg.dot", 'w')
+file_o.write("strict digraph cg {\n")
+file_o.close()
+
+def decor(fun, classname):
     def wrapper(*args, **kargs):
         global my_stack
-        string_ = fun.__name__+str(args)
+        string_ = classname+"."+fun.__name__+str(args)
         my_stack.append(string_)
         res = fun(*args, **kargs)
-        codobj = fun.__code__
         if str(my_stack) not in path_seen:
-            print(my_stack)
+            file_o = open("./cg.dot", 'a')
+            newline ="\t"+" -> ".join(my_stack)+"\n"
+            file_o.write(newline)
+            file_o.close()
         for i in range(len(my_stack)):
             if str(my_stack[:-i]) not in path_seen:
                 path_seen[str(my_stack[:-i])]= string_
@@ -31,7 +31,7 @@ class CG(type):
         changed = []
         for key, fun in dict_.items():
             if type(fun) == FunctionType:
-                dict_[key] = decor(fun)
+                dict_[key] = decor(fun, classname)
                 dict_[key].func = fun
                 changed.append(dict_[key])
         ma = type.__new__(meta, classname, supers, dict_)
