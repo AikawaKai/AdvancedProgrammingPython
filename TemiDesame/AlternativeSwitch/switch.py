@@ -25,8 +25,6 @@ class Switch(object):
                 pass
 
     def match(self, m):
-        keys = self._cases.keys()
-        for k in keys:
-            if m == k:
-                return self._cases[k]
+        if m in self._cases:
+                return self._cases[m]
         return self._cases['default']
