@@ -9,7 +9,6 @@ import inspect
 path_seen = dict()
 my_stack = ["main"]
 
-
 def decor(fun):
     def wrapper(*args, **kargs):
         global my_stack
@@ -17,8 +16,11 @@ def decor(fun):
         my_stack.append(string_)
         res = fun(*args, **kargs)
         codobj = fun.__code__
-        if fun.__name__ == 'cc':
+        if str(my_stack) not in path_seen:
             print(my_stack)
+        for i in range(len(my_stack)):
+            if str(my_stack[:-i]) not in path_seen:
+                path_seen[str(my_stack[:-i])]= string_
         my_stack.pop()
         return res
     return wrapper
