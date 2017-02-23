@@ -17,7 +17,8 @@ def decor(fun):
         curr = string_
         my_stack.append(string_)
         res = fun(*args, **kargs)
-        print(my_stack)
+        if fun.__name__ == 'cc':
+            print(my_stack)
         next_ = ""
         while next_ != curr:
             next_ = my_stack.pop()
