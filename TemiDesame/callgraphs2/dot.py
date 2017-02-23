@@ -8,13 +8,11 @@ import inspect
 
 path_seen = dict()
 my_stack = ["main"]
-path = dict()
 
 
 def decor(fun):
     def wrapper(*args, **kargs):
         global my_stack
-        global path
         string_ = fun.__name__+str(args)
         my_stack.append(string_)
         res = fun(*args, **kargs)
