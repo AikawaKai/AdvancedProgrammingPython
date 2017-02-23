@@ -1,25 +1,44 @@
-from ABC import *
-from types import FunctionType
+from types import FunctionType, MethodType
+import sys
+
+file_o = open("./cg.dot", "w")
+file_o.write("start\n")
+file_o.close()
+
+
+my_stack = []
+path = dict()
 
 def decor(fun):
-    def wrapper(*args):
-        file_o = open("./cg.dot", "a")
-        file_o.write(fun.__name__+str(args)+" -> ")
-        file_o.close()
-        res = fun(*args)
+    def wrapper(*args, **kargs):
+        global my_stack
+        global path
+        string_ = fun.__name__+str(args)
+        curr = string_
+        my_stack.append(string_)
+        res = fun(*args, **kargs)
+        print(my_stack)
+        next_ = ""
+        while next_ != curr:
+            next_ = my_stack.pop()
         return res
     return wrapper
 
 class CG(type):
 
-    def __init__(self, classname, supers, dict_, *others):
-        print(classname)
+    def __new__(meta, classname, supers, dict_):
+        changed = []
         for key, fun in dict_.items():
-            if type(fun) is FunctionType:
+            if type(fun) == FunctionType:
                 dict_[key] = decor(fun)
-        return type.__init__(self, classname, supers, dict_, *others)
+                dict_[key].func = fun
+                changed.append(dict_[key])
+        ma = type.__new__(meta, classname, supers, dict_)
+        for decorated in changed:
+            decorated.func.__globals__[classname] = ma
+        return ma
 
-
-A = CG("A", (), dict(A.__dict__))
-B = CG("B", (), dict(B.__dict__))
-C = CG("C", (), dict(C.__dict__))
+import ABC
+C = CG("C", (), dict(ABC.C.__dict__))
+B = CG("B", (), dict(ABC.B.__dict__))
+A = CG("A", (), dict(ABC.A.__dict__))
