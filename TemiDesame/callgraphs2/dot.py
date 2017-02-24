@@ -22,6 +22,11 @@ def decor(fun, classname):
             if str(my_stack[:-i]) not in path_seen:
                 path_seen[str(my_stack[:-i])]= string_
         my_stack.pop()
+        if len(my_stack)==1:
+            file_o = open("./cg.dot", 'a')
+            newline ="}"
+            file_o.write(newline)
+            file_o.close()
         return res
     return wrapper
 
