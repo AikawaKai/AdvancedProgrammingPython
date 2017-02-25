@@ -1,0 +1,8 @@
+strict digraph cg {
+main -> A.a(10,) -> A.a(9,) -> A.a(8,) -> A.a(7,) -> B.b(7,) -> B.bb(7,) -> C.c(7,) -> C.cc(14,)
+main -> A.a(10,) -> A.a(9,) -> A.a(8,) -> A.a(7,) -> B.b(7,) -> B.bb(7,) -> C.cc(7,)
+main -> A.a(10,) -> A.a(9,) -> A.a(8,) -> A.a(7,) -> C.c(3,) -> C.cc(6,)
+main -> A.a(10,) -> A.a(9,) -> A.a(8,) -> C.c(4,) -> C.cc(8,)
+main -> A.a(10,) -> A.a(9,) -> C.c(4,) -> C.cc(8,)
+main -> A.a(10,) -> C.c(5,) -> C.cc(10,)
+}
