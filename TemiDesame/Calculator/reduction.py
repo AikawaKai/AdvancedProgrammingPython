@@ -19,9 +19,15 @@ class Node():
             return True
         return False
 
+    def hasTwoLeaf(self):
+        if (type(self.left.value) is int) and (type(self.right.value) is int):
+            return True
+        else:
+            return False
+
 
 dict_operation = {"+": lambda x,y: x+y, "-": lambda x,y: x-y,
-                  "/":lambda x,y: x/y, "*": lambda x,y: x*y}
+                  "/":lambda x,y: x//y, "*": lambda x,y: x*y}
 
 class calculator():
 
@@ -60,9 +66,29 @@ def recstring(node):
     else:
         return "("+recstring(node.left) + node.value + recstring(node.right)+")"
 
+def calcLeaf(node):
+    if type(node.value) is int:
+        return node
+    if node.hasTwoLeaf():
+        node.value = dict_operation[node.value](node.left.value, node.right.value)
+        node.left = None
+        node.right = None
+    else:
+        calcLeaf(node.left)
+        calcLeaf(node.right)
 
+def isInt(express):
+    try:
+        int(express)
+        return True
+    except:
+        return False
 
 
 def print_reduction(calc):
     string_to_print = recstring(calc.root)
     print(string_to_print)
+    while not isInt(string_to_print):
+        calcLeaf(calc.root)
+        string_to_print = recstring(calc.root)
+        print(string_to_print)
