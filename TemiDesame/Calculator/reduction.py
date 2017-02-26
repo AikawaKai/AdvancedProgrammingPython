@@ -26,6 +26,9 @@ class Node():
             return False
 
 
+
+
+
 dict_operation = {"+": lambda x,y: x+y, "-": lambda x,y: x-y,
                   "/":lambda x,y: x//y, "*": lambda x,y: x*y}
 
@@ -38,7 +41,7 @@ class calculator():
 
     def _parsingExpr(self, currentNode, string_):
         if len(string_)==0:
-            return None
+            return self.root
         if re.search("^[0-9]", string_):
             if currentNode.hasNotSons():
                 currentNode.left = Node(currentNode, int(string_[0]))
@@ -58,24 +61,26 @@ class calculator():
             else:
                 self._parsingExpr(currentNode.father, string_)
 
+    def _calcLeaf(node):
+        if type(node.value) is int:
+            return node
+        if node.hasTwoLeaf():
+            node.value = dict_operation[node.value](node.left.value, node.right.value)
+            node.left = None
+            node.right = None
+        else:
+            calculator._calcLeaf(node.left)
+            calculator._calcLeaf(node.right)
 
+    def calcLeaf(self):
+        calculator._calcLeaf(self.root)
 
-def recstring(node):
-    if type(node.value) is int:
-        return str(node.value)
-    else:
-        return "("+recstring(node.left) + node.value + recstring(node.right)+")"
+    def recstring(node):
+        if type(node.value) is int:
+            return str(node.value)
+        else:
+            return "("+calculator.recstring(node.left) + node.value + calculator.recstring(node.right)+")"
 
-def calcLeaf(node):
-    if type(node.value) is int:
-        return node
-    if node.hasTwoLeaf():
-        node.value = dict_operation[node.value](node.left.value, node.right.value)
-        node.left = None
-        node.right = None
-    else:
-        calcLeaf(node.left)
-        calcLeaf(node.right)
 
 def isInt(express):
     try:
@@ -86,9 +91,9 @@ def isInt(express):
 
 
 def print_reduction(calc):
-    string_to_print = recstring(calc.root)
+    string_to_print = calculator.recstring(calc.root)
     print(string_to_print)
     while not isInt(string_to_print):
-        calcLeaf(calc.root)
-        string_to_print = recstring(calc.root)
+        calc.calcLeaf()
+        string_to_print = calculator.recstring(calc.root)
         print(string_to_print)
