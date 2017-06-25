@@ -1,4 +1,4 @@
-from my_tail_rec4 import *
+from my_tail_rec6 import *
 import sys
 
 @tail_recursion
